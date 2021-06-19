@@ -9,8 +9,11 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import IconFeather from 'react-native-vector-icons/Feather';
 import IconFontAewsome from 'react-native-vector-icons/FontAwesome5';
-import Home from '../../../pages/home/home';
+import HomePage from '../../../pages/home/home';
 import styled from 'styled-components/native';
+import SearchPage from '../../../pages/search/search-page';
+import {useDispatch} from 'react-redux';
+import {actionsAppointment} from '../../store/modules/appointments/appointments.actions';
 
 const Tab = createBottomTabNavigator();
 
@@ -67,46 +70,52 @@ const CentralIcon = () => (
     </CentralIconContainer>
 );
 
-export const TabsBottom = () => (
+export const TabsBottom = () => {
+    const dispatch = useDispatch();
+    dispatch(actionsAppointment.allRequest());
     // TODO: SUbstituir componentes pelos componentes reais
-    <Tab.Navigator
-        initialRouteName={RouteName.HOME}
-        tabBarOptions={tabsOptions}
-        lazy>
-        <Tab.Screen
-            name={RouteName.HOME}
-            component={Home}
-            options={{
-                tabBarIcon: ({focused}) => prepareIconFeather('home', focused),
-            }}
-        />
-        <Tab.Screen
-            name={RouteName.SEARCH}
-            component={Login}
-            options={{
-                tabBarIcon: ({focused}) =>
-                    prepareIconFeather('search', focused),
-            }}
-        />
-        <Tab.Screen
-            name={RouteName.CREATE}
-            component={Login}
-            options={{tabBarIcon: () => <CentralIcon />}}
-        />
-        <Tab.Screen
-            name={RouteName.FAVORITES}
-            component={Login}
-            options={{
-                tabBarIcon: ({focused}) => prepareIconFeather('heart', focused),
-            }}
-        />
-        <Tab.Screen
-            name={RouteName.PROFILE}
-            component={Login}
-            options={{
-                tabBarIcon: ({focused}) =>
-                    prepareIconFA5('user-circle', focused),
-            }}
-        />
-    </Tab.Navigator>
-);
+    return (
+        <Tab.Navigator
+            initialRouteName={RouteName.SEARCH}
+            tabBarOptions={tabsOptions}
+            lazy>
+            <Tab.Screen
+                name={RouteName.HOME}
+                component={HomePage}
+                options={{
+                    tabBarIcon: ({ focused }) =>
+                        prepareIconFeather('ho"home"ocused),
+               }}
+            />
+            <Tab.Screen
+                name={RouteName.SEARCH}
+                component={SearchPage}
+                options={{
+                    tabBarIcon: ({ focused }) =>
+                        prepareIconFeather('se"search"ocused),
+               }}
+            />
+            <Tab.Screen
+                name={RouteName.CREATE}
+                component={Login}
+                options={{ tabBarIcon: () => <CentralIcon /> }}
+            />
+            <Tab.Screen
+                name={RouteName.FAVORITES}
+                component={Login}
+                options={{
+                    tabBarIcon: ({ focused }) =>
+                        prepareIconFeather('he"heart"ocused),
+               }}
+            />
+            <Tab.Screen
+                name={RouteName.PROFILE}
+                component={Login}
+                options={{
+                    tabBarIcon: ({ focused }) =>
+                        prepareIconFA5('us"user-circle"ocused),
+               }}
+            />
+        </Tab.Navigator>
+    );
+};

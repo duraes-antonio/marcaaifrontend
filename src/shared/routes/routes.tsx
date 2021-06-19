@@ -5,7 +5,6 @@ import React from 'react';
 import Signup from '../../pages/signup/signup';
 import PasswordRecover from '../../pages/auth/password-recover/password-recover';
 import PasswordRedefinition from '../../pages/auth/password-redefinition/password-redefinition';
-import Home from '../../pages/home/home';
 import {TabsBottom} from '../components/bottom-tabs/tabs-bottom';
 
 export enum RouteName {

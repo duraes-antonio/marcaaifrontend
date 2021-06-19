@@ -10,6 +10,7 @@ export const grey6 = '#f6f6f6';
 export const grey5 = '#E0E0E0';
 export const grey4 = '#bdbdbd';
 export const grey3 = '#828282';
+export const colorInputForm = '#bbb';
 export const colorLabel = '#777';
 
 export const ralewaySemiBold = 'Raleway-SemiBold';

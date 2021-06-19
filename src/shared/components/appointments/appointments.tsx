@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {useSelector} from 'react-redux';
 import {Appointment} from './appointment';
-import {RootState} from '../../store/types';
 import {AppointmentState} from '../../store/modules/appointments/appointments.reducer';
+import reduxSelectors from '../../store/root-selector';
 
 const Container = styled.ScrollView`
     position: relative;
@@ -14,10 +14,9 @@ const Container = styled.ScrollView`
 `;
 
 const Appointments = () => {
-    const appointments: AppointmentState = useSelector<
-        RootState,
-        AppointmentState
-    >(s => s.appointments);
+    const appointments: AppointmentState = useSelector(
+        reduxSelectors.appointments,
+    );
     return (
         <Container>
             {appointments.map(a => (

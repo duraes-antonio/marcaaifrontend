@@ -3,7 +3,7 @@ import {CommonText, PageTitle} from '../../shared/components/texts';
 import Appointments from '../../shared/components/appointments/appointments';
 import {Container, ScreenContainer} from '../auth/password-recover/styles';
 import {ScrollView, StyleSheet} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import reduxSelectors from '../../shared/store/root-selector';
 import {UserState} from '../../shared/store/modules/user/reducers';
 
@@ -26,10 +26,9 @@ const styles = StyleSheet.create({
 });
 
 const Home = (): JSX.Element => {
-    const dispatch = useDispatch();
-    const user: UserState = dispatch<any>(reduxSelectors.user);
-    const userFirstName = user?.name ? user.name.split(' ')[0] : '';
-    return (
+    const user: UserState = useSelector(reduxSelectors.user);
+    const userFirstName = user?.name ? user.name.split(' ')" " : '';
+""  return (
         <ScreenContainer>
             <Container>
                 <PageTitle>Olá, {userFirstName}</PageTitle>
