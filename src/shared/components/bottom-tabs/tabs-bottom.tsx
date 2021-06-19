@@ -83,38 +83,38 @@ export const TabsBottom = () => {
                 name={RouteName.HOME}
                 component={HomePage}
                 options={{
-                    tabBarIcon: ({ focused }) =>
-                        prepareIconFeather('ho"home"ocused),
-               }}
+                    tabBarIcon: ({focused}) =>
+                        prepareIconFeather('home', focused),
+                }}
             />
             <Tab.Screen
                 name={RouteName.SEARCH}
                 component={SearchPage}
                 options={{
-                    tabBarIcon: ({ focused }) =>
-                        prepareIconFeather('se"search"ocused),
-               }}
+                    tabBarIcon: ({focused}) =>
+                        prepareIconFeather('search', focused),
+                }}
             />
             <Tab.Screen
                 name={RouteName.CREATE}
                 component={Login}
-                options={{ tabBarIcon: () => <CentralIcon /> }}
+                options={{tabBarIcon: () => <CentralIcon />}}
             />
             <Tab.Screen
                 name={RouteName.FAVORITES}
                 component={Login}
                 options={{
-                    tabBarIcon: ({ focused }) =>
-                        prepareIconFeather('he"heart"ocused),
-               }}
+                    tabBarIcon: ({focused}) =>
+                        prepareIconFeather('heart', focused),
+                }}
             />
             <Tab.Screen
                 name={RouteName.PROFILE}
                 component={Login}
                 options={{
-                    tabBarIcon: ({ focused }) =>
-                        prepareIconFA5('us"user-circle"ocused),
-               }}
+                    tabBarIcon: ({focused}) =>
+                        prepareIconFA5('user-circle', focused),
+                }}
             />
         </Tab.Navigator>
     );

@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
 
 const Home = (): JSX.Element => {
     const user: UserState = useSelector(reduxSelectors.user);
-    const userFirstName = user?.name ? user.name.split(' ')" " : '';
-""  return (
+    const userFirstName = user?.name ? user.name.split(' ')[0] : '';
+    return (
         <ScreenContainer>
             <Container>
                 <PageTitle>Olá, {userFirstName}</PageTitle>
