@@ -11,18 +11,19 @@ export class AppointmentAsyncStorageService
     private static readonly key = 'appointment';
 
     async load(): Promise<Optional<AppointmentCollection>> {
-        const userJSON = new Optional(
-            await AsyncStorage.getItem(AppointmentAsyncStorageService.key),
+        const json = await AsyncStorage.getItem(
+            AppointmentAsyncStorageService.key,
         );
-        return userJSON.ifHasValue<AppointmentCollection>(json =>
-            JSON.parse(json),
+        const dataJson = new Optional(json);
+        return dataJson.ifHasValue<AppointmentCollection>(_json =>
+            JSON.parse(_json),
         );
     }
 
     save(data: AppointmentCollection): Promise<void> {
         return AsyncStorage.setItem(
             AppointmentAsyncStorageService.key,
-            JSON.stringify(data),
+            JSON.stringify(data ?? [),
         );
     }
 }

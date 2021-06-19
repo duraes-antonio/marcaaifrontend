@@ -1,4 +1,3 @@
-import {combineReducers} from 'redux';
 import {StringNullable} from '../../../types/general';
 import {ActionAuthType} from './actions';
 import {ReduxActionWithValue} from '../../types';
@@ -28,4 +27,4 @@ const authReducer = (
     }
 };
 
-export default combineReducers([authReducer]);
+export default authReducer;

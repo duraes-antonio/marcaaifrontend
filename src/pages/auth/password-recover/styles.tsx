@@ -1,8 +1,9 @@
 import {Dimensions, StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
+
 const dimensions = Dimensions.get('window').height;
 
-export const ScreenContainer = styled.ScrollView`
+export const ScreenContainer = styled.View`
     background: white;
     min-height: 100%;
     position: relative;

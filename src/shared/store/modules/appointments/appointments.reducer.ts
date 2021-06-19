@@ -1,9 +1,6 @@
-import {combineReducers} from 'redux';
-import {ActionAppointment, ActionAppointmentType} from './appointments.actions';
-import {
-    IUserAppointment,
-    UserAppointment,
-} from '../../../../domain/entities/appointment';
+import {ActionAppointmentType} from './appointments.actions';
+import {UserAppointment} from '../../../../domain/entities/appointment';
+import {ReduxActionWithValue} from '../../types';
 
 export type AppointmentState = UserAppointment[];
 
@@ -11,17 +8,16 @@ export const INITIAL_STATE: AppointmentState = [];
 
 const appointmentReducer = (
     state = INITIAL_STATE,
-    action: ActionAppointment,
+    action: ReduxActionWithValue<UserAppointment | UserAppointment[]>,
 ): AppointmentState => {
     switch (action.type) {
+        case ActionAppointmentType.SET:
+            return [...(action.value as UserAppointment[])];
         case ActionAppointmentType.ADD:
-            return [
-                ...state,
-                new UserAppointment(<IUserAppointment>action.value),
-            ];
+            return [...state, <UserAppointment>action.value];
         default:
             return state;
     }
 };
 
-export default combineReducers([appointmentReducer]);
+export default appointmentReducer;

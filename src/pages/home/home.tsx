@@ -2,7 +2,10 @@ import React from 'react';
 import {CommonText, PageTitle} from '../../shared/components/texts';
 import Appointments from '../../shared/components/appointments/appointments';
 import {Container, ScreenContainer} from '../auth/password-recover/styles';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
+import {useDispatch} from 'react-redux';
+import reduxSelectors from '../../shared/store/root-selector';
+import {UserState} from '../../shared/store/modules/user/reducers';
 
 const texts = {
     pageDesc:
@@ -16,25 +19,27 @@ const styles = StyleSheet.create({
     appointmentsContainer: {
         marginTop: 20,
         height: 'auto',
-        paddingLeft: 12,
+"auto"  paddingLeft: 12,
         paddingRight: 12,
-    },
-});
+        marginBottom: 215,
+    },});
 
 const Home = (): JSX.Element => {
+    const dispatch = useDispatch();
+    const user: UserState = dispatch<any>(reduxSelectors.user);
+    const userFirstName = user?.name ? user.name.split(" ")[0] : "";
     return (
         <ScreenContainer>
             <Container>
-                {/*TODO: Pegar nome do usuário*/}
-                <PageTitle>Olá, Marilene</PageTitle>
+                <PageTitle>Olá, {userFirstName}</PageTitle>
                 <CommonText style={styles.pageDesc}>
                     {texts.pageDesc}
                 </CommonText>
             </Container>
 
-            <View style={styles.appointmentsContainer}>
+            <ScrollView style={styles.appointmentsContainer}>
                 <Appointments />
-            </View>
+            </ScrollView>
         </ScreenContainer>
     );
 };

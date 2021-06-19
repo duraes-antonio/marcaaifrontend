@@ -38,14 +38,17 @@ export class ApointmentMockService
             'https://image.freepik.com/free-vector/barbershop-logo_95982-25.jpg',
             'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/barbershop-logo-design-template-9880273b09ae6d101cae59105771f8c4_screen.jpg?ts=1584641345',
             'https://image.freepik.com/free-vector/luxury-barbershop-logo-design_313044-6.jpg',
+            'https://image.freepik.com/free-vector/barbershop-logo_95982-25.jpg',
+            'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/barbershop-logo-design-template-9880273b09ae6d101cae59105771f8c4_screen.jpg?ts=1584641345',
         ];
         const appointmentsMock: IUserAppointment[] = serviceImages.map(img => ({
             ...baseAppointment,
-            service: {...baseAppointment.service, imageUrl: img},
+            id: this.generateGuid(),
+            service: { ...baseAppointment.service, imageUrl: img ,
         }));
         return later(
-            Math.random() * 2000,
-            appointmentsMock.map(a => new UserAppointment(a)),
+            Math.random() * 3000,
+            appointmentsMock.map(a => new UserAppointment(a))
         );
     }
 }

@@ -5,7 +5,6 @@ import {UserAppointment} from '../../../domain/entities/appointment';
 import {colorRed} from '../../styles/global-styles';
 import ActionButton from '../buttons/action-button';
 import {IconLib} from '../icon/icon-lib';
-import {actionsAppointment} from '../../store/modules/appointments/appointments.actions';
 import {
     AppointmentTime,
     Container,
@@ -19,8 +18,7 @@ export function Appointment(props: {data: UserAppointment}): JSX.Element {
     const dispatch = useDispatch();
     const {service} = props.data;
 
-    const cancelAppointment = () =>
-        dispatch(actionsAppointment.cancel(props.data.id));
+    const cancelAppointment = () => null;
 
     return (
         <View style={styles.containerGeneral}>
