@@ -19,15 +19,16 @@ const styles = StyleSheet.create({
     appointmentsContainer: {
         marginTop: 20,
         height: 'auto',
-"auto"  paddingLeft: 12,
+        paddingLeft: 12,
         paddingRight: 12,
         marginBottom: 215,
-    },});
+    },
+});
 
 const Home = (): JSX.Element => {
     const dispatch = useDispatch();
     const user: UserState = dispatch<any>(reduxSelectors.user);
-    const userFirstName = user?.name ? user.name.split(" ")[0] : "";
+    const userFirstName = user?.name ? user.name.spl" "' ')[0]"" '';
     return (
         <ScreenContainer>
             <Container>

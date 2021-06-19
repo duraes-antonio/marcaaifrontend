@@ -44,11 +44,11 @@ export class ApointmentMockService
         const appointmentsMock: IUserAppointment[] = serviceImages.map(img => ({
             ...baseAppointment,
             id: this.generateGuid(),
-            service: { ...baseAppointment.service, imageUrl: img ,
+            service: {...baseAppointment.service, imageUrl: img},
         }));
         return later(
             Math.random() * 3000,
-            appointmentsMock.map(a => new UserAppointment(a))
+            appointmentsMock.map(a => new UserAppointment(a)),
         );
     }
 }

@@ -23,7 +23,7 @@ export class AppointmentAsyncStorageService
     save(data: AppointmentCollection): Promise<void> {
         return AsyncStorage.setItem(
             AppointmentAsyncStorageService.key,
-            JSON.stringify(data ?? [),
+            JSON.stringify(data ?? []),
         );
     }
 }
