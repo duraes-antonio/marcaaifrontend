@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
-import {colorPrimary, grey3, ralewaySemiBold} from '../styles/global-styles';
+import {colorPrimary, grey3, ralewaySemiBold} from '../../styles/global-styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const svgHeihgt = 120;

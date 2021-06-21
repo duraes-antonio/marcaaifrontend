@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from 'react-native-paper';
 import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
-import {colorPrimary, robotoMedium} from '../styles/global-styles';
+import {colorPrimary, robotoMedium} from '../../styles/global-styles';
 import styled from 'styled-components/native';
 
 export interface ButtonProps {

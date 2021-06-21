@@ -3,14 +3,11 @@ import {
     colorLabel,
     colorPrimary,
     grey3,
-    robotoBold,
-    robotoLight,
     robotoMedium,
     robotoRegular,
-    robotoThin,
-} from '../styles/global-styles';
+} from '../../styles/global-styles';
 import React from 'react';
-import {TextProps} from 'react-native';
+import {StyleSheet, TextProps} from 'react-native';
 
 const sizes = {
     title: 24,
@@ -39,16 +36,18 @@ export const ActionTextBicolor = (
     } & TextProps,
 ) => {
     const fontSize = props.fontSize ?? 14;
+    const _styles = StyleSheet.create({
+        textColored: {
+            color: props.color ?? colorPrimary,
+            fontSize,
+            fontWeight: '700',
+        },
+    });
     return (
         // @ts-ignore
         <CommonText onPress={props.onPress} style={{...props.style, fontSize}}>
             {props.text}{' '}
-            <CommonText
-                style={{
-                    color: props.color ?? colorPrimary,
-                    fontSize,
-                    fontWeight: '700',
-                }}>
+            <CommonText style={_styles.textColored}>
                 {props.textColored}
             </CommonText>
         </CommonText>

@@ -1,7 +1,12 @@
 import React from 'react';
 import styled, {css} from 'styled-components/native';
-import {Logo} from '../../shared/components/logo';
-import {stylesGlobal} from '../../shared/styles/global-styles';
+import {Logo} from '../../shared/components/general/logo';
+import {
+    ralewayBold,
+    ralewayItalic,
+    ralewaySemiBold,
+    stylesGlobal,
+} from '../../shared/styles/global-styles';
 
 const Container = styled.View`
     display: flex;
@@ -17,7 +22,7 @@ const LogoMargin = styled.View`
 `;
 
 const titleBaseStyle = css`
-    font-family: Raleway-SemiBold;
+    font-family: ${ralewaySemiBold};
     font-size: 20px;
     color: ${stylesGlobal.colorPrimary};
 `;
@@ -28,12 +33,12 @@ const AppNameTitle = styled.Text`
 
 const AppNameTitleBold = styled.Text`
     ${titleBaseStyle};
-    font-family: Raleway-Bold;
+    font-family: ${ralewayBold};
 `;
 
 const AppNameSubtitle = styled.Text`
     ${titleBaseStyle};
-    font-family: Raleway-Italic;
+    font-family: ${ralewayItalic};
     font-size: 16px;
 `;
 

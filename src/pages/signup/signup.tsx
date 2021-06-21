@@ -3,11 +3,11 @@ import {actionsAuth} from '../../shared/store/modules/auth/actions';
 import {RouteName} from '../../shared/routes/routes';
 import RegisterVector from '../../../assets/vectors/register.svg';
 import {styles, Text, TextSignUp, TextSignUpColor} from '../login/styles';
-import RoundedForm from '../../shared/components/rounded-form';
-import {SocialLoginButtons} from '../../shared/components/social-buttons';
+import RoundedForm from '../../shared/components/general/rounded-form';
+import {SocialLoginButtons} from '../../shared/components/general/social-buttons';
 import InputEmail from '../../shared/components/input/input-email';
 import InputPassword from '../../shared/components/input/input-password';
-import ButtonContained from '../../shared/components/button';
+import ButtonContained from '../../shared/components/buttons/button';
 import {LoginScreenProps} from '../login/login';
 import {useDispatch} from 'react-redux';
 

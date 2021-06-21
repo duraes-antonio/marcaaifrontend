@@ -7,7 +7,7 @@ import {
 import {IdType} from '../../../shared/store/types';
 import {later, MockService} from '../base-mock';
 
-export class ApointmentMockService
+export class ApointmentServiceMock
     extends MockService
     implements AppointmentService
 {

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {Container, ScreenContainer} from '../password-recover/styles';
-import {CommonText, PageTitle} from '../../../shared/components/texts';
+import {ContainerScrollable, Page} from '../password-recover/styles';
+import {CommonText, PageTitle} from '../../../shared/components/general/texts';
 import PasswordRedefinitionSvg from '../../../../assets/vectors/password_redefinition.svg';
 import InputPassword from '../../../shared/components/input/input-password';
 import {styles} from './styles';
-import ButtonContained from '../../../shared/components/button';
+import ButtonContained from '../../../shared/components/buttons/button';
 import PasswordStrength from './password-strength';
 import {PasswordSecurityLevel} from '../../../models/password-validator';
 
@@ -34,8 +34,8 @@ const PasswordRedefinition = () => {
 
     const redefinitionHandler = () => null;
     return (
-        <ScreenContainer>
-            <Container>
+        <Page>
+            <ContainerScrollable>
                 <PageTitle>{texts.title}</PageTitle>
                 <CommonText style={styles.description}>
                     {texts.description}
@@ -72,8 +72,8 @@ const PasswordRedefinition = () => {
                     onPress={redefinitionHandler}
                     style={styles.button}
                 />
-            </Container>
-        </ScreenContainer>
+            </ContainerScrollable>
+        </Page>
     );
 };
 

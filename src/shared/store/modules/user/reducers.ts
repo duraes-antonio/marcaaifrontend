@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {StringNullable} from '../../../types/general';
 import {ActionUser, ActionUserType} from './actions';
+import {IdType} from '../../types';
 
 export interface UserState {
     name: StringNullable;
@@ -8,6 +9,7 @@ export interface UserState {
     id: StringNullable;
     facebookId?: StringNullable;
     googleId?: StringNullable;
+    providersFavorite: IdType[];
 }
 
 export const INITIAL_STATE: UserState = {
@@ -16,6 +18,7 @@ export const INITIAL_STATE: UserState = {
     googleId: null,
     email: null,
     name: null,
+    providersFavorite: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action: ActionUser): UserState => {

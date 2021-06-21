@@ -1,16 +1,28 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
 
-const dimensions = Dimensions.get('window').height;
+const paddingTopScreen = 40;
 
-export const ScreenContainer = styled.View`
+export const Page = styled.View`
     background: white;
     min-height: 100%;
     position: relative;
 `;
 
-const paddingTopScreen = 40;
-export const Container = styled.ScrollView`
+export const PageHead = styled.View`
+    padding: ${paddingTopScreen}px 25px 0;
+`;
+
+export const PageBody = styled.ScrollView`
+    padding-bottom: 90px;
+`;
+
+export const PageBodyContent = styled.View`
+    padding: 5px 25px 0;
+    height: 100%;
+`;
+
+export const ContainerScrollable = styled.ScrollView`
     padding: ${paddingTopScreen}px 25px 0;
 `;
 

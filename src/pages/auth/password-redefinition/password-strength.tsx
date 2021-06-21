@@ -11,7 +11,7 @@ import {
     PasswordSecurityLevel,
     PasswordStrengthPipeline,
 } from '../../../models/password-validator';
-import {CommonText} from '../../../shared/components/texts';
+import {CommonText} from '../../../shared/components/general/texts';
 import {Container, ContainerSteps, StepBar} from './styles';
 import {StyleSheet} from 'react-native';
 

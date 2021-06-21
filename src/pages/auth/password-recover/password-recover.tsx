@@ -3,11 +3,11 @@ import {
     ActionTextBicolor,
     CommonText,
     PageTitle,
-} from '../../../shared/components/texts';
+} from '../../../shared/components/general/texts';
 import InputEmail from '../../../shared/components/input/input-email';
-import ButtonContained from '../../../shared/components/button';
+import ButtonContained from '../../../shared/components/buttons/button';
 import ForgotPasswordSvg from '../../../../assets/vectors/forgot_password.svg';
-import {Container, ScreenContainer, SvgContainer, styles} from './styles';
+import {ContainerScrollable, Page, styles, SvgContainer} from './styles';
 import {LoginScreenProps} from '../../login/login';
 import {RouteName} from '../../../shared/routes/routes';
 import {services} from '../../../data/services/di';
@@ -43,8 +43,8 @@ const PasswordRecover = ({navigation}: LoginScreenProps) => {
 
     return (
         // TODO: Centralizar estilos
-        <ScreenContainer>
-            <Container>
+        <Page>
+            <ContainerScrollable>
                 <PageTitle>{texts.title}</PageTitle>
                 <CommonText style={styles.pageDesc}>
                     {texts.description}
@@ -64,14 +64,14 @@ const PasswordRecover = ({navigation}: LoginScreenProps) => {
                         onPress={handleRecover}
                     />
                 </SvgContainer>
-            </Container>
+            </ContainerScrollable>
             <ActionTextBicolor
                 onPress={redirectToLogin}
                 text={texts.login}
                 textColored={texts.loginAction}
                 style={styles.loginTextAction}
             />
-        </ScreenContainer>
+        </Page>
     );
 };
 

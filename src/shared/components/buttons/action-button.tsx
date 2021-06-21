@@ -10,6 +10,7 @@ const ActionsContainer = styled.TouchableOpacity`
     position: absolute;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
     bottom: 15px;
     right: 0;
 `;
@@ -22,7 +23,7 @@ const ActionText = styled.Text`
 
 const ActionButton = (props: IconProps & {lib: IconLib; text?: string}) => {
     return (
-        <ActionsContainer>
+        <ActionsContainer style={{...props.style}}>
             <IconWrapper {...props} lib={props.lib} size={20} />
             <ActionText>{props.text}</ActionText>
         </ActionsContainer>

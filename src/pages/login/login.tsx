@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import LoginVector from '../../../assets/vectors/login.svg';
-import ButtonContained from '../../shared/components/button';
-import {SocialLoginButtons} from '../../shared/components/social-buttons';
+import ButtonContained from '../../shared/components/buttons/button';
+import {SocialLoginButtons} from '../../shared/components/general/social-buttons';
 import InputEmail from '../../shared/components/input/input-email';
 import InputPassword from '../../shared/components/input/input-password';
-import RoundedForm from '../../shared/components/rounded-form';
+import RoundedForm from '../../shared/components/general/rounded-form';
 import {useDispatch} from 'react-redux';
 import {StackActions} from '@react-navigation/native';
 import {styles, svgHeihgt, Text, TextForgotPassword} from './styles';
 import {RouteName} from '../../shared/routes/routes';
 import {actionsAuth} from '../../shared/store/modules/auth/actions';
-import {ActionTextBicolor} from '../../shared/components/texts';
+import {ActionTextBicolor} from '../../shared/components/general/texts';
 
 export interface LoginScreenProps {
     navigation: typeof StackActions;

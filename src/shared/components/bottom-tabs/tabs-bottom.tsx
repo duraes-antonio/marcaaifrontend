@@ -70,6 +70,7 @@ const CentralIcon = () => (
     </CentralIconContainer>
 );
 
+// TODO: Avaliar usar com 'position: relative'
 export const TabsBottom = () => {
     const dispatch = useDispatch();
     dispatch(actionsAppointment.allRequest());

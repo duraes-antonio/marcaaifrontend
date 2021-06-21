@@ -1,6 +1,6 @@
 import React from 'react';
-import {Container, ScreenContainer} from '../password-recover/styles';
-import {CommonText, PageTitle} from '../../../shared/components/texts';
+import {ContainerScrollable, Page} from '../password-recover/styles';
+import {CommonText, PageTitle} from '../../../shared/components/general/texts';
 import {StyleSheet} from 'react-native';
 import EmailConfirmedSvg from '../../../../assets/vectors/email_confirmed.svg';
 
@@ -24,15 +24,15 @@ const styles = StyleSheet.create({
 const ForgotPassEmailConfirmed = () => {
     return (
         // TODO: Centralizar estilos
-        <ScreenContainer>
-            <Container>
+        <Page>
+            <ContainerScrollable>
                 <PageTitle>{texts.title}</PageTitle>
                 <CommonText style={styles.description}>
                     {texts.description}
                 </CommonText>
                 <EmailConfirmedSvg height={140} style={styles.emailSvg} />
-            </Container>
-        </ScreenContainer>
+            </ContainerScrollable>
+        </Page>
     );
 };
 

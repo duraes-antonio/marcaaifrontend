@@ -1,6 +1,5 @@
 import React from 'react';
 import {Image, View} from 'react-native';
-import {useDispatch} from 'react-redux';
 import {UserAppointment} from '../../../domain/entities/appointment';
 import {colorRed} from '../../styles/global-styles';
 import ActionButton from '../buttons/action-button';
@@ -15,11 +14,10 @@ import {
 } from './styles';
 
 export function Appointment(props: {data: UserAppointment}): JSX.Element {
-    const dispatch = useDispatch();
     const {service} = props.data;
 
+    // TODO: FInalizar
     const cancelAppointment = () => null;
-
     return (
         <View style={styles.containerGeneral}>
             <Container activeOpacity={3 / 4} style={styles.containerShadow}>
