@@ -3,7 +3,6 @@ import IconFeather from 'react-native-vector-icons/Feather';
 import IconFontAewsome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
 import {colorLabel} from '../../styles/global-styles';
 
 export enum IconLib {
@@ -29,9 +28,5 @@ export const IconWrapper = (props: IconProps & {lib: IconLib}): JSX.Element => {
     if (!icon) {
         throw new Error('Icon not found');
     }
-    return (
-        <TouchableOpacity>
-            {icon({...props, color: props.color ?? colorLabel})}
-        </TouchableOpacity>
-    );
+    return icon({...props, color: props.color ?? colorLabel});
 };

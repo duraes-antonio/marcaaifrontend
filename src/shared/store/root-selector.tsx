@@ -5,6 +5,7 @@ export const reduxSelectors = {
     auth: (state: RootState) => state.auth,
     salon: (state: RootState) => state.salon,
     user: (state: RootState) => state.user,
+    likedProviders: (state: RootState) => state.user.providersFavorite,
 };
 
 export default reduxSelectors;

@@ -15,14 +15,23 @@ import RatingView from '../../rating-view/rating-view';
 import ActionButton from '../../buttons/action-button';
 import {IconLib} from '../../icon/icon-lib';
 import {colorLabel50, colorPrimary} from '../../../styles/global-styles';
+import {useDispatch} from 'react-redux';
+import {actionsUser} from '../../../store/modules/user/actions';
 
 const ProviderItem = (props: {provider: IProvider; liked: boolean}) => {
-    const {provider} = props;
+    const {provider, liked} = props;
+    const dispatch = useDispatch();
+    const toggleLike = () => {
+        const action = liked
+            ? actionsUser.unlikeProviderRequest(props.provider.id)
+            : actionsUser.likeProviderRequest(props.provider.id);
+        dispatch(action);
+    };
     return (
         <ProviderContainer activeOpacity={3 / 4} style={styles.containerShadow}>
             <ActionButton
-                style={styles.likeButton}
-                color={props.liked ? colorPrimary : colorLabel50}
+                onPress={() => toggleLike()}
+                style={{color: liked ? colorPrimary : colorLabel50}}
                 lib={IconLib.MATERIAL_COMMUNITY}
                 name={'heart'}
             />

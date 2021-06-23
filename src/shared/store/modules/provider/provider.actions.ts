@@ -4,7 +4,6 @@ import {StringNullable} from '../../../types/general';
 
 export enum ActionProviderType {
     CREATE = '@provider/create',
-    FAVORITE_TOGGLE = '@provider/favorite-toggle',
     GET = '@provider/get',
     SEARCH = '@provider/search',
 }
@@ -15,10 +14,6 @@ export const actionsProvider = {
     create: (data: IProvider): ActionProvider => ({
         type: ActionProviderType.GET,
         value: data,
-    }),
-    favoriteToggle: (id: IdType): ReduxActionWithId => ({
-        type: ActionProviderType.FAVORITE_TOGGLE,
-        value: id,
     }),
     get: (id: IdType): ReduxActionWithId => ({
         type: ActionProviderType.GET,

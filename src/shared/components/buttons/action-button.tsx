@@ -23,7 +23,7 @@ const ActionText = styled.Text`
 
 const ActionButton = (props: IconProps & {lib: IconLib; text?: string}) => {
     return (
-        <ActionsContainer style={{...props.style}}>
+        <ActionsContainer {...props}>
             <IconWrapper {...props} lib={props.lib} size={20} />
             <ActionText>{props.text}</ActionText>
         </ActionsContainer>

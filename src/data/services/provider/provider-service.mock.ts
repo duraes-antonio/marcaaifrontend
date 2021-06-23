@@ -61,7 +61,6 @@ export class ProviderServiceMock
     }
 
     search(term?: StringNullable): Promise<IProvider[]> {
-        console.log('SEARCH --> ', term);
         const values = this.providersMock.filter(
             p => !term || p.name.toLowerCase().includes(term?.toLowerCase()),
         );
