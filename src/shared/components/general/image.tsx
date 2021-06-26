@@ -18,7 +18,7 @@ const _Image = styled.Image`
 `;
 
 export const CustomImage = (
-    props: ImageCustomProps & Omit<ImageProps, 'source'>,
+    props: ImageCustomProps & ImageProps,
 ): JSX.Element => {
     const {height, uri, borderWidth, borderRadius, borderColor, circle, width} =
         props;

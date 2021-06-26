@@ -75,7 +75,7 @@ const PageBody = (props: {user: UserBasicData}) => {
 
 export const Profile = () => {
     // const user: UserState = useSelector(reduxSelectors.user);
-    const [user, setUser] = useState<UserBasicData>(null);
+    const [user, setUser] = useState<UserBasicData>();
 
     const updateUser = async () =>
         setUser(await services.auth.signIn({username: 'a', password: 'a'}));

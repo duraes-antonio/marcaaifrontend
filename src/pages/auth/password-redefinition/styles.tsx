@@ -35,7 +35,6 @@ export const ContainerSteps = styled.View`
 `;
 
 export const StepBar = styled.View`
-    // @ts-ignore
     background-color: ${props => props.style?.backgroundColor};
     height: 4px;
     border-radius: 5px;
