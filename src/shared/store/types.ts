@@ -1,4 +1,4 @@
-import {AppointmentState} from './modules/appointments/appointments.reducer';
+import {AppointmentState} from './modules/appointments/reducer';
 import {AuthState} from './modules/auth/reducers';
 import {SalonState} from './modules/salon/reducers';
 import {UserState} from './modules/user/reducers';

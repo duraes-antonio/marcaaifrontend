@@ -13,7 +13,7 @@ import HomePage from '../../../pages/home/home';
 import styled from 'styled-components/native';
 import SearchPage from '../../../pages/search/search-page';
 import {useDispatch} from 'react-redux';
-import {actionsAppointment} from '../../store/modules/appointments/appointments.actions';
+import {actionsAppointment} from '../../store/modules/appointments/actions';
 import FavoriteProvider from '../../../pages/favorites/favorite';
 import Profile from '../../../pages/profile/profile';
 

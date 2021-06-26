@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {useSelector} from 'react-redux';
 import {Appointment} from './appointment';
-import {AppointmentState} from '../../store/modules/appointments/appointments.reducer';
+import {AppointmentState} from '../../store/modules/appointments/reducer';
 import reduxSelectors from '../../store/root-selector';
 
 const Container = styled.ScrollView`

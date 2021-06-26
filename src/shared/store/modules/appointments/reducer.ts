@@ -1,4 +1,4 @@
-import {ActionAppointmentType} from './appointments.actions';
+import {ActionAppointmentType} from './actions';
 import {UserAppointment} from '../../../../domain/entities/appointment';
 import {ReduxActionWithValue} from '../../types';
 

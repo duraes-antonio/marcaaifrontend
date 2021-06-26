@@ -1,8 +1,5 @@
 import {all, call, put, takeLatest} from 'redux-saga/effects';
-import {
-    ActionAppointmentType,
-    actionsAppointment,
-} from './appointments.actions';
+import {ActionAppointmentType, actionsAppointment} from './actions';
 import {services} from '../../../../data/services/di';
 import {UserAppointment} from '../../../../domain/entities/appointment';
 import {ReduxActionWithId} from '../../types';
