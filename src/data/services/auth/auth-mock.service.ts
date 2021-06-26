@@ -1,7 +1,9 @@
 import {UserAuth} from '../../../domain/use-cases/user-auth';
 import {AuthCredentials} from '../../../models/auth';
+import {MockService} from '../base-mock';
+import {User} from '../../../domain/entities/user';
 
-export class AuthServiceMock implements UserAuth {
+export class AuthServiceMock extends MockService implements UserAuth {
     private generateJWT(email: string, pass: string): string {
         if (!email || !pass) {
             throw new Error('Email ou senha ausentes');
@@ -17,18 +19,24 @@ export class AuthServiceMock implements UserAuth {
         return Promise.resolve(token);
     }
 
-    signIn(credentials: AuthCredentials): Promise<string> {
-        const value = this.generateJWT(
-            credentials.username,
-            credentials.password,
-        );
-        return this.later(1500, value);
-    }
-
     signOut(token: string): Promise<void> {
         if (!token) {
             throw new Error('Lançamento de erro só pra silenciar lint');
         }
         return Promise.resolve();
+    }
+
+    signIn(credentials: AuthCredentials): Promise<User & {token: string}> {
+        const value = this.generateJWT(
+            credentials.username,
+            credentials.password,
+        );
+        const user: User = {
+            email: 'jao@teste.com',
+            name: 'João da Silva',
+            username: 'jaodasilva',
+            id: this.generateGuid(),
+        };
+        return this.later(1500, {...user, token: value});
     }
 }

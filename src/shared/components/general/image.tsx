@@ -1,12 +1,8 @@
 import React from 'react';
+import {ImageProps} from 'react-native';
 import styled from 'styled-components/native';
 
-const _Image = styled.Image`
-    height: ${props => props.height};
-    width: ${props => props.width};
-`;
-
-export type ImageProps = {
+export type ImageCustomProps = {
     height?: number;
     width?: number;
     circle?: boolean;
@@ -16,17 +12,25 @@ export type ImageProps = {
     uri: string;
 };
 
-export const Image = (props: ImageProps): JSX.Element => {
+const _Image = styled.Image`
+    width: ${props => props.width ?? props.height}px;
+    height: ${props => props.height ?? props.width}px;
+`;
+
+export const CustomImage = (
+    props: ImageCustomProps & Omit<ImageProps, 'source'>,
+): JSX.Element => {
     const {height, uri, borderWidth, borderRadius, borderColor, circle, width} =
         props;
     const finalBorderRadius = (circle ? width || height : borderRadius) ?? 0;
+    const _style = props.style;
     return (
         <_Image
             width={width}
             height={height}
             borderRadius={finalBorderRadius}
             source={{uri: uri}}
-            style={{borderWidth, borderColor}}
+            style={{...(_style ?? {}), borderWidth, borderColor}}
         />
     );
 };

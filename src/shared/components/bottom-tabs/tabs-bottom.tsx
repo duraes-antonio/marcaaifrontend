@@ -14,6 +14,8 @@ import styled from 'styled-components/native';
 import SearchPage from '../../../pages/search/search-page';
 import {useDispatch} from 'react-redux';
 import {actionsAppointment} from '../../store/modules/appointments/appointments.actions';
+import FavoriteProvider from '../../../pages/favorites/favorite';
+import Profile from '../../../pages/profile/profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -77,7 +79,7 @@ export const TabsBottom = () => {
     // TODO: SUbstituir componentes pelos componentes reais
     return (
         <Tab.Navigator
-            initialRouteName={RouteName.SEARCH}
+            initialRouteName={RouteName.PROFILE}
             tabBarOptions={tabsOptions}
             lazy>
             <Tab.Screen
@@ -103,7 +105,7 @@ export const TabsBottom = () => {
             />
             <Tab.Screen
                 name={RouteName.FAVORITES}
-                component={Login}
+                component={FavoriteProvider}
                 options={{
                     tabBarIcon: ({focused}) =>
                         prepareIconFeather('heart', focused),
@@ -111,7 +113,7 @@ export const TabsBottom = () => {
             />
             <Tab.Screen
                 name={RouteName.PROFILE}
-                component={Login}
+                component={Profile}
                 options={{
                     tabBarIcon: ({focused}) =>
                         prepareIconFA5('user-circle', focused),

@@ -10,7 +10,7 @@ const ActionsContainer = styled.TouchableOpacity`
     position: absolute;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     bottom: 15px;
     right: 0;
 `;

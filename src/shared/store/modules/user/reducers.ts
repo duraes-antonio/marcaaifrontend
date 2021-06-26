@@ -4,8 +4,10 @@ import {IdType, ReduxActionWithValue} from '../../types';
 
 export interface UserState {
     name: StringNullable;
+    username: StringNullable;
     email: StringNullable;
     id: StringNullable;
+    imageUrl?: StringNullable;
     facebookId?: StringNullable;
     googleId?: StringNullable;
     providersFavorite: IdType[];
@@ -17,6 +19,7 @@ export const INITIAL_STATE: UserState = {
     googleId: null,
     email: null,
     name: null,
+    username: null,
     providersFavorite: [],
 };
 

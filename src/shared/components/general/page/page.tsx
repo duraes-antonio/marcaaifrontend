@@ -7,11 +7,13 @@ import {
     PageHead,
     pagePaddingHorizontal,
 } from './styles';
+import {Nullable} from '../../../types/general';
 
 export interface PageProps {
     body: JSX.Element;
-    header?: JSX.Element;
+    header?: Nullable<JSX.Element>;
     applyPaddingBody?: boolean;
+    applyPaddingHeaderHeight?: boolean;
     headerFixed?: boolean;
     bodyScrollable?: boolean;
 }
@@ -35,7 +37,11 @@ export const Page = (props: PageProps) => {
                         if (!e?.nativeEvent?.layout) {
                             return;
                         }
-                        setHeaderHeight(e.nativeEvent.layout.height + 90);
+                        const paddingHeight =
+                            props.applyPaddingHeaderHeight === false
+                                ? 0
+                                : e.nativeEvent.layout.height;
+                        setHeaderHeight(paddingHeight + 90);
                     }}>
                     {props.header}
                 </PageHead>

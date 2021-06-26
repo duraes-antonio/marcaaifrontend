@@ -13,6 +13,7 @@ export const grey3 = '#828282';
 export const colorInputForm = 'rgba(187, 187, 187, .25)';
 export const colorLabel = '#777';
 export const colorLabel50 = 'rgba(119, 119, 119, 0.5)';
+export const colorLabel75 = 'rgba(119, 119, 119, 0.75)';
 
 export const ralewaySemiBold = 'Raleway-SemiBold';
 export const ralewayBold = 'Raleway-Bold';

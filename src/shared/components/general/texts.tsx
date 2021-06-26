@@ -11,6 +11,7 @@ import {StyleSheet, TextProps} from 'react-native';
 
 const sizes = {
     title: 24,
+    subtitle: 22,
     common: 15,
 };
 
@@ -20,11 +21,19 @@ export const PageTitle = styled.Text`
     font-size: ${sizes.title}px;
 `;
 
+export const PageSubtitle = styled(PageTitle)`
+    font-size: ${sizes.title}px;
+`;
+
 export const CommonText = styled.Text`
     font-family: ${robotoRegular};
     color: ${grey3};
     font-size: ${sizes.common}px;
     line-height: ${sizes.common * 1.5}px;
+`;
+
+export const SemiBoldText = styled(CommonText)`
+    font-family: ${robotoMedium};
 `;
 
 export const ActionTextBicolor = (

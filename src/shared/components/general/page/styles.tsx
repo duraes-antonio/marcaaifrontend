@@ -17,6 +17,7 @@ export const PageContainer = styled.View`
 export const PageHead = styled.View`
     background-color: white;
     padding: ${paddingTopScreen}px ${pagePaddingHorizontal}px 0;
+    margin-bottom: 20px;
 `;
 
 export const PageBodyScroll = styled.ScrollView``;

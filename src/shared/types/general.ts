@@ -18,4 +18,6 @@ export class Optional<T> {
     }
 }
 
-export type StringNullable = string | undefined | null;
+export type Nullable<T> = null | undefined | T;
+
+export type StringNullable = Nullable<string>;

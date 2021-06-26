@@ -60,6 +60,11 @@ export class ProviderServiceMock
         return this.mockRequest(providerId).then(() => null);
     }
 
+    getFavorites(): Promise<IProvider[]> {
+        const values = this.providersMock.slice(0, 2);
+        return later(2000, values);
+    }
+
     search(term?: StringNullable): Promise<IProvider[]> {
         const values = this.providersMock.filter(
             p => !term || p.name.toLowerCase().includes(term?.toLowerCase()),

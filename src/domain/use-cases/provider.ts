@@ -9,5 +9,7 @@ export interface ProviderService {
 
     get(providerId: IdType): Promise<IProvider | null>;
 
+    getFavorites(): Promise<IProvider[]>;
+
     search(term?: StringNullable): Promise<IProvider[]>;
 }
