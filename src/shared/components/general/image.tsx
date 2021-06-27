@@ -30,6 +30,7 @@ export const CustomImage = (
             height={height}
             borderRadius={finalBorderRadius}
             source={{uri: uri}}
+            // @ts-ignore
             style={{...(_style ?? {}), borderWidth, borderColor}}
         />
     );

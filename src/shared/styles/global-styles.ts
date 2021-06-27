@@ -3,6 +3,7 @@ export const colorPrimary2 = 'rgba(132,0,240,0.6)';
 
 export const colorRed = 'rgba(255,0,0,0.65)';
 export const colorOrange = '#F2994A';
+export const colorYellow = '#F2C94C';
 export const colorGreen60 = '#32CD3299';
 export const colorGreen = '#32CD32';
 

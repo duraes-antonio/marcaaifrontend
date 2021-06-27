@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {useSelector} from 'react-redux';
-import {Appointment} from './appointment';
+import Appointment from './appointment';
 import {AppointmentState} from '../../store/modules/appointments/reducer';
 import reduxSelectors from '../../store/root-selector';
 
@@ -10,7 +10,6 @@ const Container = styled.ScrollView`
     width: 100%;
     min-height: 100%;
     flex: 1;
-    padding: 5px;
 `;
 
 const Appointments = () => {

@@ -15,6 +15,7 @@ export interface UserAppointmentInput {
 
 export interface IUserAppointment extends Entity {
     service: SalonService;
+    status: AppointmentStatus;
     timeStart: Date;
     timeEnd: Date;
 }
@@ -24,10 +25,12 @@ export class UserAppointment implements IUserAppointment {
     readonly service: SalonService;
     readonly timeStart: Date;
     readonly timeEnd: Date;
+    readonly status: AppointmentStatus = AppointmentStatus.WAITING;
     readonly eventDateFormatted: string;
 
     constructor(data: IUserAppointment) {
         this.id = data.id;
+        this.status = data.status;
         this.service = data.service;
         this.timeStart = data.timeStart;
         this.timeEnd = data.timeEnd;
@@ -49,4 +52,10 @@ export class UserAppointment implements IUserAppointment {
         }
         return `${timeStartFormatted} às ${timeEndFormatted}`;
     }
+}
+
+export enum AppointmentStatus {
+    CANCELED,
+    DONE,
+    WAITING,
 }

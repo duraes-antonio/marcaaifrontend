@@ -8,6 +8,7 @@ import {
     pagePaddingHorizontal,
 } from './styles';
 import {Nullable} from '../../../types/general';
+import {BottomSheetWrapper} from '../bottom-sheet-wrapper';
 
 export interface PageProps {
     body: JSX.Element;
@@ -19,8 +20,8 @@ export interface PageProps {
 }
 
 export const Page = (props: PageProps) => {
-    const pageHeadRef = useRef(null);
     const [headerHeight, setHeaderHeight] = useState(0);
+    const pageHeadRef = useRef(null);
     const styles = StyleSheet.create({
         pageBody: {
             paddingBottom: headerHeight + 90,
@@ -30,6 +31,7 @@ export const Page = (props: PageProps) => {
     });
     return (
         <PageContainer>
+            {<BottomSheetWrapper />}
             {props.header && (
                 <PageHead
                     ref={pageHeadRef}
@@ -46,7 +48,6 @@ export const Page = (props: PageProps) => {
                     {props.header}
                 </PageHead>
             )}
-
             {props.bodyScrollable ? (
                 <PageBodyScroll>
                     <PageBodyContent style={styles.pageBody}>

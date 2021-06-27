@@ -1,5 +1,6 @@
 import {AppointmentService} from '../../../domain/use-cases/appointment';
 import {
+    AppointmentStatus,
     IUserAppointment,
     UserAppointment,
     UserAppointmentInput,
@@ -31,6 +32,7 @@ export class ApointmentServiceMock
                     name: 'Zequinha BarberShop',
                 },
             },
+            status: AppointmentStatus.WAITING,
             timeStart: new Date(2020, 10, 11, 12, 30),
             timeEnd: new Date(2020, 10, 11, 12, 30),
         };
@@ -41,11 +43,17 @@ export class ApointmentServiceMock
             'https://image.freepik.com/free-vector/barbershop-logo_95982-25.jpg',
             'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/barbershop-logo-design-template-9880273b09ae6d101cae59105771f8c4_screen.jpg?ts=1584641345',
         ];
-        const appointmentsMock: IUserAppointment[] = serviceImages.map(img => ({
-            ...baseAppointment,
-            id: this.generateGuid(),
-            service: {...baseAppointment.service, imageUrl: img},
-        }));
+        const appointmentsMock: IUserAppointment[] = serviceImages.map(
+            (img, i) => ({
+                ...baseAppointment,
+                id: this.generateGuid(),
+                service: {...baseAppointment.service, imageUrl: img},
+                status:
+                    i === 0
+                        ? AppointmentStatus.DONE
+                        : AppointmentStatus.WAITING,
+            }),
+        );
         return later(
             Math.random() * 3000,
             appointmentsMock.map(a => new UserAppointment(a)),
