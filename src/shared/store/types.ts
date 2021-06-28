@@ -11,7 +11,7 @@ export interface ReduxAction {
 }
 
 export interface ReduxActionWithValue<T> extends ReduxAction {
-    value?: T | null | undefined;
+    value: T;
 }
 
 export interface ReduxActionWithId extends ReduxActionWithValue<IdType> {

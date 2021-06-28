@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from 'react-native-paper';
 import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
-import {colorPrimary, robotoMedium} from '../../styles/global-styles';
+import {colorPrimary, ralewaySemiBold} from '../../styles/global-styles';
 import styled from 'styled-components/native';
 
 export interface ButtonProps {
@@ -32,7 +32,7 @@ const _styles = StyleSheet.create({
 });
 
 const ButtonText = styled.Text`
-    font-family: ${robotoMedium};
+    font-family: ${ralewaySemiBold};
     font-weight: 600;
 `;
 
@@ -50,7 +50,7 @@ const ButtonContained = (props: ButtonProps) => {
             mode="contained"
             uppercase={uppercase}
             color={color}
-            disabled={disabled}
+            disabled={disabled || loading}
             style={finalStyle}
             contentStyle={_styles.container}
             onPress={onPress}>

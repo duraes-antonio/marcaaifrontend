@@ -7,7 +7,7 @@ import {pagePaddingHorizontal} from '../../general/page/styles';
 import {useSelector} from 'react-redux';
 import reduxSelectors from '../../../store/root-selector';
 
-const ProvidersView = styled.View`
+const ListContainer = styled.View`
     overflow: visible;
 `;
 
@@ -39,7 +39,7 @@ const ProviderList = (props: ProviderListProps) => {
         </ItemContainer>
     );
     return (
-        <ProvidersView>
+        <ListContainer>
             <FlatList
                 data={props.providers}
                 ListHeaderComponent={props.header}
@@ -49,7 +49,7 @@ const ProviderList = (props: ProviderListProps) => {
                 renderItem={renderItem}
                 stickyHeaderIndices={[0]}
             />
-        </ProvidersView>
+        </ListContainer>
     );
 };
 

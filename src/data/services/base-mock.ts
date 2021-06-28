@@ -1,4 +1,7 @@
-export const later = <T>(delay: number, value: T): Promise<any> => {
+export const later = <T>(
+    value: T,
+    delay = Math.random() * 3000,
+): Promise<any> => {
     return new Promise(resolve => setTimeout(resolve, delay, value));
 };
 
@@ -7,7 +10,7 @@ export abstract class MockService {
         if (!params) {
             throw new Error();
         }
-        return later(Math.random() * 2500, null);
+        return later(null, Math.random() * 3500);
     }
 
     protected generateGuid(): string {

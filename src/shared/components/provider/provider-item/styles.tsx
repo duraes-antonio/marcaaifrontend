@@ -9,8 +9,8 @@ import {
 
 export const styles = StyleSheet.create({
     containerShadow: {
-        elevation: 8,
-        shadowColor: 'rgba(0, 0, 0, .75)',
+        elevation: 6,
+        shadowColor: 'rgba(0, 0, 0, .6)',
         shadowOffset: {
             width: 0,
             height: 5,

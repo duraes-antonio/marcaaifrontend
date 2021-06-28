@@ -6,6 +6,7 @@ import {
 } from '../../types';
 import {
     IUserAppointment,
+    RatingAppointmentInput,
     UserAppointment,
 } from '../../../../domain/entities/appointment';
 
@@ -14,6 +15,8 @@ export enum ActionAppointmentType {
     SET = '@appointments/set',
     ALL_REQUEST = '@appointments/all-request',
     CANCEL_REQUEST = '@appointments/cancel-request',
+    ADD_REVIEW_REQUEST = '@appointments/add-review-request',
+    UPDATE_REVIEW_REQUEST = '@appointments/update-review-request',
     CANCEL = '@appointments/cancel',
 }
 
@@ -28,6 +31,22 @@ export const actionsAppointment = {
     },
     cancelRequest(id: IdType): ReduxActionWithId {
         return {type: ActionAppointmentType.CANCEL_REQUEST, value: id};
+    },
+    addReviewRequest(
+        reviewData: RatingAppointmentInput,
+    ): ReduxActionWithValue<RatingAppointmentInput> {
+        return {
+            type: ActionAppointmentType.ADD_REVIEW_REQUEST,
+            value: reviewData,
+        };
+    },
+    updateReviewRequest(
+        reviewData: RatingAppointmentInput,
+    ): ReduxActionWithValue<RatingAppointmentInput> {
+        return {
+            type: ActionAppointmentType.UPDATE_REVIEW_REQUEST,
+            value: reviewData,
+        };
     },
     set(data: UserAppointment[]): ReduxActionWithValue<UserAppointment[]> {
         return {type: ActionAppointmentType.SET, value: data};

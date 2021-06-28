@@ -62,13 +62,13 @@ export class ProviderServiceMock
 
     getFavorites(): Promise<IProvider[]> {
         const values = this.providersMock.slice(0, 2);
-        return later(2000, values);
+        return later(values, 2000);
     }
 
     search(term?: StringNullable): Promise<IProvider[]> {
         const values = this.providersMock.filter(
             p => !term || p.name.toLowerCase().includes(term?.toLowerCase()),
         );
-        return later(2000, values);
+        return later(values, 2000);
     }
 }

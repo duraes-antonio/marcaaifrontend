@@ -11,7 +11,7 @@ import {
     ProviderName,
     styles,
 } from './styles';
-import RatingView from '../../rating-view/rating-view';
+import RatingView from '../../rating/rating-view';
 import ActionButton from '../../buttons/action-button';
 import {IconLib} from '../../icon/icon-lib';
 import {colorLabel50, colorPrimary} from '../../../styles/global-styles';

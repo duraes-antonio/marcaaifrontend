@@ -2,6 +2,8 @@ import {AppointmentService} from '../../../domain/use-cases/appointment';
 import {
     AppointmentStatus,
     IUserAppointment,
+    RatingAppointment,
+    RatingAppointmentInput,
     UserAppointment,
     UserAppointmentInput,
 } from '../../../domain/entities/appointment';
@@ -47,7 +49,11 @@ export class ApointmentServiceMock
             (img, i) => ({
                 ...baseAppointment,
                 id: this.generateGuid(),
-                service: {...baseAppointment.service, imageUrl: img},
+                service: {
+                    ...baseAppointment.service,
+                    name: `#${i + 1} ${baseAppointment.service.name}`,
+                    imageUrl: img,
+                },
                 status:
                     i === 0
                         ? AppointmentStatus.DONE
@@ -55,8 +61,27 @@ export class ApointmentServiceMock
             }),
         );
         return later(
-            Math.random() * 3000,
             appointmentsMock.map(a => new UserAppointment(a)),
+            Math.random() * 3000,
         );
+    }
+
+    getReview(reviewId: IdType): Promise<RatingAppointment> {
+        return later<RatingAppointment>({
+            value: 4,
+            id: reviewId,
+            comment: 'Muito bom o atendimento e tals',
+            date: new Date(2021, 1, 12),
+            appointmentId: this.generateGuid(),
+            userId: this.generateGuid(),
+        });
+    }
+
+    addReview(data: RatingAppointmentInput): Promise<IdType> {
+        return this.mockRequest(data).then(() => this.generateGuid());
+    }
+
+    updateReview(data: RatingAppointmentInput): Promise<void> {
+        return this.mockRequest(data);
     }
 }

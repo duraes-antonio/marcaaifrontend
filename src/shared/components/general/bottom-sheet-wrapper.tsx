@@ -1,15 +1,19 @@
 import React, {useEffect, useRef} from 'react';
-import RBSheet, {RBSheetProps} from 'react-native-raw-bottom-sheet';
+import RBSheet from 'react-native-raw-bottom-sheet';
 import {useSelector} from 'react-redux';
 import reduxSelectors from '../../store/root-selector';
 
-export function BottomSheetWrapper(props: RBSheetProps) {
+export function BottomSheetWrapper() {
     const {modalContent} = useSelector(reduxSelectors.userInterface);
     const bottomSheetRef = useRef<RBSheet>(null);
     useEffect(() => {
-        if (modalContent && bottomSheetRef?.current) {
-            bottomSheetRef?.current?.open();
+        if (!bottomSheetRef?.current) {
+            return;
         }
+        if (!modalContent) {
+            return bottomSheetRef?.current?.close();
+        }
+        bottomSheetRef?.current?.open();
     }, [modalContent]);
     return (
         <RBSheet
@@ -17,8 +21,17 @@ export function BottomSheetWrapper(props: RBSheetProps) {
             closeOnDragDown
             closeOnPressBack
             closeOnPressMask
+            height={500}
+            animationType={'fade'}
+            openDuration={100}
+            closeDuration={100}
             customStyles={{
-                container: {borderTopLeftRadius: 20, borderTopRightRadius: 20},
+                container: {
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20,
+                    height: 'auto',
+                    paddingBottom: 20,
+                },
             }}>
             {modalContent}
         </RBSheet>

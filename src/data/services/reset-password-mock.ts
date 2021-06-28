@@ -6,13 +6,13 @@ export class ResetPasswordServiceMock implements ResetPasswordService {
         if (!password) {
             throw new Error();
         }
-        return later(Math.random() * 1000 * 5, null);
+        return later(null, Math.random() * 1000 * 5);
     }
 
     resetRequest(email: string): Promise<void> {
         if (!email) {
             throw new Error();
         }
-        return later(Math.random() * 1000 * 5, null);
+        return later(null, Math.random() * 1000 * 5);
     }
 }

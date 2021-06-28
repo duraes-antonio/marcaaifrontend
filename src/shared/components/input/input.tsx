@@ -1,15 +1,15 @@
 import {HelperText, TextInput as TextInputPaper} from 'react-native-paper';
-import {colorRed, colorPrimary, grey4} from '../../styles/global-styles';
+import {colorPrimary, colorRed, grey4} from '../../styles/global-styles';
 import React, {useRef, useState} from 'react';
 import {StyleProp, TextInput, TextStyle, View} from 'react-native';
 
-const themeColor: Partial<ReactNativePaper.ThemeColors> = {
+export const themeColor: Partial<ReactNativePaper.ThemeColors> = {
     primary: colorPrimary,
     placeholder: grey4,
     error: colorRed,
 };
 
-const theme: Partial<ReactNativePaper.Theme> = {
+export const theme: Partial<ReactNativePaper.Theme> = {
     roundness: 18,
 };
 

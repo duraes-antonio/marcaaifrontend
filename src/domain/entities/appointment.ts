@@ -14,6 +14,7 @@ export interface UserAppointmentInput {
 }
 
 export interface IUserAppointment extends Entity {
+    ratingId?: IdType;
     service: SalonService;
     status: AppointmentStatus;
     timeStart: Date;
@@ -22,6 +23,7 @@ export interface IUserAppointment extends Entity {
 
 export class UserAppointment implements IUserAppointment {
     readonly id: IdType;
+    readonly ratingId?: IdType;
     readonly service: SalonService;
     readonly timeStart: Date;
     readonly timeEnd: Date;
@@ -30,6 +32,7 @@ export class UserAppointment implements IUserAppointment {
 
     constructor(data: IUserAppointment) {
         this.id = data.id;
+        this.ratingId = data.ratingId;
         this.status = data.status;
         this.service = data.service;
         this.timeStart = data.timeStart;
@@ -52,6 +55,17 @@ export class UserAppointment implements IUserAppointment {
         }
         return `${timeStartFormatted} às ${timeEndFormatted}`;
     }
+}
+
+export interface RatingAppointmentInput {
+    value: number;
+    appointmentId: IdType;
+    comment?: string;
+}
+
+export interface RatingAppointment extends Entity, RatingAppointmentInput {
+    userId: IdType;
+    date: Date;
 }
 
 export enum AppointmentStatus {

@@ -1,4 +1,9 @@
-import {IdType, ReduxActionWithId, ReduxActionWithValue} from '../../types';
+import {
+    IdType,
+    ReduxAction,
+    ReduxActionWithId,
+    ReduxActionWithValue,
+} from '../../types';
 import {User} from '../../../../domain/entities/user';
 
 export enum ActionUserType {
@@ -16,7 +21,7 @@ export enum ActionUserType {
 export type ActionUser = ReduxActionWithValue<User>;
 
 export const actionsUser = {
-    recoverUserOrRedirect(): ActionUser {
+    recoverUserOrRedirect(): ReduxAction {
         return {type: ActionUserType.RECOVER};
     },
 

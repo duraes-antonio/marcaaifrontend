@@ -7,7 +7,7 @@ import {
     grey5,
     robotoMedium,
     robotoRegular,
-} from '../../styles/global-styles';
+} from '../../../styles/global-styles';
 
 export const Container = styled.TouchableOpacity`
     flex-direction: row;
