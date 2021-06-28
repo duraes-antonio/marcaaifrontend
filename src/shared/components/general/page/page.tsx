@@ -8,7 +8,6 @@ import {
     pagePaddingHorizontal,
 } from './styles';
 import {Nullable} from '../../../types/general';
-import {BottomSheetWrapper} from '../bottom-sheet-wrapper';
 
 export interface PageProps {
     body: JSX.Element;
@@ -31,7 +30,6 @@ export const Page = (props: PageProps) => {
     });
     return (
         <PageContainer>
-            {<BottomSheetWrapper />}
             {props.header && (
                 <PageHead
                     ref={pageHeadRef}

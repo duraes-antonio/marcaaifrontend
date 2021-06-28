@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
 
 export const styles = StyleSheet.create({
-    buttonFinalize: {
+    button: {
         alignSelf: 'center',
         marginTop: 20,
         width: 200,

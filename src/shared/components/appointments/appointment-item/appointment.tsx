@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {Image} from 'react-native';
 import {UserAppointment} from '../../../../domain/entities/appointment';
 import {
@@ -18,6 +18,10 @@ function Appointment(props: {
 }): JSX.Element {
     const {service} = props.data;
     const timeTransition = 350;
+    const Icon = useMemo(
+        () => <AppointmentIconAction appointment={props.data} />,
+        [props.data],
+    );
     return (
         <Animatable.View
             animation={'slideInDown'}
@@ -34,7 +38,7 @@ function Appointment(props: {
                         {props.data.eventDateFormatted}
                     </AppointmentTime>
                     <ProviderName>{service.provider.name}</ProviderName>
-                    <AppointmentIconAction appointment={props.data} />
+                    {Icon}
                 </InfoContainer>
             </Container>
         </Animatable.View>

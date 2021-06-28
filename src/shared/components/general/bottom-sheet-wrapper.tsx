@@ -1,9 +1,9 @@
-import React, {useEffect, useRef} from 'react';
+import React, {memo, useEffect, useRef} from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {useSelector} from 'react-redux';
 import reduxSelectors from '../../store/root-selector';
 
-export function BottomSheetWrapper() {
+function BottomSheetWrapper() {
     const {modalContent} = useSelector(reduxSelectors.userInterface);
     const bottomSheetRef = useRef<RBSheet>(null);
     useEffect(() => {
@@ -11,9 +11,9 @@ export function BottomSheetWrapper() {
             return;
         }
         if (!modalContent) {
-            return bottomSheetRef?.current?.close();
+            return bottomSheetRef.current.close();
         }
-        bottomSheetRef?.current?.open();
+        bottomSheetRef.current.open();
     }, [modalContent]);
     return (
         <RBSheet
@@ -37,3 +37,5 @@ export function BottomSheetWrapper() {
         </RBSheet>
     );
 }
+
+export default memo(BottomSheetWrapper);
