@@ -17,8 +17,8 @@ import {IconLib} from '../../icon/icon-lib';
 import {colorLabel50, colorPrimary} from '../../../styles/global-styles';
 import {useDispatch} from 'react-redux';
 import {actionsUser} from '../../../store/modules/user/actions';
-import Tag from '../../tag/tag';
 import TagWorkPdayStatus from '../../tag/tag-workday';
+import TagDistance from '../../tag/tag-distance';
 
 const ProviderItem = (props: {provider: IProvider; liked: boolean}) => {
     const {provider, liked} = props;
@@ -48,7 +48,11 @@ const ProviderItem = (props: {provider: IProvider; liked: boolean}) => {
                         status={provider.workStatus}
                         style={styles.tagWorkday}
                     />
-                    <Tag>10 km</Tag>
+                    {provider.distanceInMeters && (
+                        <TagDistance
+                            distanceInMeters={provider.distanceInMeters}
+                        />
+                    )}
                 </Tags>
             </ProviderInfo>
         </ProviderContainer>

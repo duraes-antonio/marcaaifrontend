@@ -18,7 +18,7 @@ const statusColor: {[key in WorkdayStatus]: string} = {
 };
 
 function TagWorkPdayStatus(
-    props: {status: WorkdayStatus} & Omit<TagProps, 'children'>,
+    props: {status?: WorkdayStatus} & Omit<TagProps, 'children'>,
 ): JSX.Element {
     return (
         <Tag

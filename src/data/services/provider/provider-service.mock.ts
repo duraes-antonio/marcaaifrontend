@@ -8,7 +8,7 @@ import {
 } from '../../../domain/entities/provider';
 import {IdType} from '../../../shared/store/types';
 import {Location} from '../../../models/location';
-import {Workday} from '../../../domain/entities/schedule';
+import {Workday, WorkdayStatus} from '../../../domain/entities/schedule';
 
 export class ProviderServiceMock
     extends MockService
@@ -55,6 +55,8 @@ export class ProviderServiceMock
                         end: new Date(this.data.getTime() + 10),
                     },
                 }),
+                workStatus: WorkdayStatus.UNKNOWN,
+                distanceInMeters: Math.random() * 5000,
             });
         },
     );

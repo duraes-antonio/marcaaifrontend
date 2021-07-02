@@ -20,6 +20,7 @@ export interface IProvider extends NamedEntity {
     routine?: Workday;
     exceptionalDays?: Workday[];
     workStatus?: WorkdayStatus;
+    distanceInMeters?: number;
 }
 
 export type ProviderInput = Omit<IProvider, 'id'>;
