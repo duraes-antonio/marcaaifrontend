@@ -27,7 +27,7 @@ function Appointment(props: {
             animation={'slideInDown'}
             duration={timeTransition}
             useNativeDriver>
-            <Container style={styles.containerShadow}>
+            <Container activeOpacity={3 / 4} style={styles.containerShadow}>
                 <Image
                     style={styles.serviceImage}
                     source={{uri: service.imageUrl}}

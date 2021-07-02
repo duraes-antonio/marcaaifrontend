@@ -1,18 +1,22 @@
-import React from 'react';
+import React, {memo} from 'react';
+import {StyleSheet} from 'react-native';
 import {IconProps} from 'react-native-vector-icons/Icon';
 import styled from 'styled-components/native';
 import {colorLabel, robotoRegular} from '../../styles/global-styles';
 import {IconLib, IconWrapper} from '../icon/icon-lib';
 
+const size = 35;
+
 const ActionsContainer = styled.TouchableOpacity`
-    height: 50px;
-    width: 50px;
+    height: ${size}px;
+    width: ${size}px;
     position: absolute;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    bottom: 15px;
-    right: 0;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: ${size}px;
 `;
 
 const ActionText = styled.Text`
@@ -21,13 +25,24 @@ const ActionText = styled.Text`
     font-size: 10px;
 `;
 
-const ActionButton = (props: IconProps & {lib: IconLib; text?: string}) => {
+const styles = StyleSheet.create({
+    iconWithText: {
+        backgroundColor: 'transparent',
+        width: 'auto',
+    },
+});
+
+function ActionButton(
+    props: IconProps & {lib: IconLib; text?: string},
+): JSX.Element {
     return (
-        <ActionsContainer {...props}>
+        <ActionsContainer
+            onPress={props.onPress}
+            style={props.text ? styles.iconWithText : undefined}>
             <IconWrapper {...props} lib={props.lib} size={20} />
-            <ActionText>{props.text}</ActionText>
+            {props.text && <ActionText>{props.text}</ActionText>}
         </ActionsContainer>
     );
-};
+}
 
-export default ActionButton;
+export default memo(ActionButton);

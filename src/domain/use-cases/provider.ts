@@ -1,6 +1,7 @@
 import {IProvider, ProviderInput} from '../entities/provider';
 import {IdType} from '../../shared/store/types';
-import {StringNullable} from '../../shared/types/general';
+import {Nullable, StringNullable} from '../../shared/types/general';
+import {Location} from '../../models/location';
 
 export interface ProviderService {
     create(data: ProviderInput): Promise<IProvider>;
@@ -11,5 +12,8 @@ export interface ProviderService {
 
     getFavorites(): Promise<IProvider[]>;
 
-    search(term?: StringNullable): Promise<IProvider[]>;
+    search(
+        term?: StringNullable,
+        location?: Nullable<Location>,
+    ): Promise<IProvider[]>;
 }

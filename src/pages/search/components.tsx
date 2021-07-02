@@ -23,7 +23,7 @@ export const SearchBarInput = styled.TextInput`
     width: 85%;
 `;
 
-export const ButtonFilters = styled.TouchableOpacity`
+export const ButtonGetLocation = styled.TouchableOpacity`
     ${SearchBarItemCSS};
     width: 45px;
     margin-left: 5px;

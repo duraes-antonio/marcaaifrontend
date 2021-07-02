@@ -9,8 +9,8 @@ import {
 
 export const styles = StyleSheet.create({
     containerShadow: {
-        elevation: 6,
-        shadowColor: 'rgba(0, 0, 0, .6)',
+        elevation: 7,
+        shadowColor: 'rgba(0, 0, 0, .45)',
         shadowOffset: {
             width: 0,
             height: 5,
@@ -20,10 +20,13 @@ export const styles = StyleSheet.create({
         borderRadius: 25,
         bottom: 0,
     },
+    tagWorkday: {
+        marginRight: 5,
+    },
 });
 
 export const ProviderContainer = styled.TouchableOpacity`
-    background-color: white;
+    background-color: #fdfdfd;
     border-radius: 15px;
     min-height: 100px;
     align-items: center;
@@ -57,4 +60,10 @@ export const ProviderCategoryName = styled(CommomText)`
     font-size: 12px;
     font-family: ${robotoRegular};
     max-width: 100%;
+`;
+
+export const Tags = styled.View`
+    flex-direction: row;
+    flex: 1;
+    width: auto;
 `;

@@ -10,13 +10,15 @@ import {
     ProviderInfo,
     ProviderName,
     styles,
+    Tags,
 } from './styles';
-import RatingView from '../../rating/rating-view';
 import ActionButton from '../../buttons/action-button';
 import {IconLib} from '../../icon/icon-lib';
 import {colorLabel50, colorPrimary} from '../../../styles/global-styles';
 import {useDispatch} from 'react-redux';
 import {actionsUser} from '../../../store/modules/user/actions';
+import Tag from '../../tag/tag';
+import TagWorkPdayStatus from '../../tag/tag-workday';
 
 const ProviderItem = (props: {provider: IProvider; liked: boolean}) => {
     const {provider, liked} = props;
@@ -41,7 +43,13 @@ const ProviderItem = (props: {provider: IProvider; liked: boolean}) => {
                 <ProviderCategoryName>
                     {providerCategoryName[provider.category]}
                 </ProviderCategoryName>
-                <RatingView value={provider.averageRating} />
+                <Tags>
+                    <TagWorkPdayStatus
+                        status={provider.workStatus}
+                        style={styles.tagWorkday}
+                    />
+                    <Tag>10 km</Tag>
+                </Tags>
             </ProviderInfo>
         </ProviderContainer>
     );

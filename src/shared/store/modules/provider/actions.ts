@@ -1,5 +1,5 @@
 import {IdType, ReduxActionWithId, ReduxActionWithValue} from '../../types';
-import {IProvider} from '../../../../domain/entities/provider';
+import {ProviderInput} from '../../../../domain/entities/provider';
 import {StringNullable} from '../../../types/general';
 
 export enum ActionProviderType {
@@ -8,10 +8,8 @@ export enum ActionProviderType {
     SEARCH = '@provider/search',
 }
 
-export type ActionProvider = ReduxActionWithValue<IProvider>;
-
 export const actionsProvider = {
-    create: (data: IProvider): ActionProvider => ({
+    create: (data: ProviderInput): ReduxActionWithValue<ProviderInput> => ({
         type: ActionProviderType.GET,
         value: data,
     }),

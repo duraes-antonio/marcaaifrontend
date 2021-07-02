@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {PageTitle} from '../../shared/components/general/texts';
 import {IconLib, IconWrapper} from '../../shared/components/icon/icon-lib';
 import {
-    ButtonFilters,
+    ButtonGetLocation,
     SearchBar,
     SearchBarContainer,
     SearchBarInput,
@@ -11,39 +11,53 @@ import {IProvider} from '../../domain/entities/provider';
 import ProviderList from '../../shared/components/provider/provider-list/provider-list';
 import {Page} from '../../shared/components/general/page/page';
 import {services} from '../../data/services/di';
-import {StringNullable} from '../../shared/types/general';
+import {Nullable, StringNullable} from '../../shared/types/general';
 import {PageHead} from '../../shared/components/general/page/styles';
+import {Location} from '../../models/location';
+import {getLocation} from '../../shared/util/permission';
+import {colorPrimary} from '../../shared/styles/global-styles';
 
 const debounce = require('lodash.debounce');
 
-const texts = {
-    pageTitle: 'Busque por um serviço ou estabelecimento',
-};
+const texts = {pageTitle: 'Busque por um serviço ou estabelecimento'};
 
-const SearchPage = () => {
+function SearchPage(): JSX.Element {
     const [providers, setProviders] = useState<IProvider[]>([]);
     const [loading, setLoading] = useState(false);
     const [text, setText] = useState('');
-    const searchProviders = useCallback(async (textSearch?: StringNullable) => {
-        setLoading(true);
-        setProviders(await services.provider.search(textSearch));
-        setLoading(false);
-    }, []);
+    const [coords, setCoords] = useState<Nullable<Location>>();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const debounceSearch = useCallback(
-        debounce((textSearch?: string) => searchProviders(textSearch), 250),
+    const searchProviders = useCallback(
+        async (textSearch?: StringNullable, location?: Nullable<Location>) => {
+            setLoading(true);
+            setProviders(await services.provider.search(textSearch, location));
+            setLoading(false);
+        },
         [],
     );
 
-    const handleChange = (value: string) => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const debounceSearch = useCallback(
+        debounce(
+            (textSearch?: string, location?: Nullable<Location>) =>
+                searchProviders(textSearch, location),
+            250,
+        ),
+        [],
+    );
+
+    const handleChange = (value: string, location?: Nullable<Location>) => {
         setText(value);
-        debounceSearch(value);
+        debounceSearch(value, location);
     };
 
     useEffect(() => {
-        debounceSearch(text);
-    }, [debounceSearch, text]);
+        getLocation(location => setCoords(location));
+    }, []);
+
+    useEffect(() => {
+        debounceSearch(text, coords);
+    }, [debounceSearch, text, coords]);
 
     const Header = (
         <PageHead>
@@ -52,7 +66,9 @@ const SearchPage = () => {
                 <SearchBar>
                     <SearchBarInput
                         onChangeText={setText}
-                        onTextInput={e => handleChange(e.nativeEvent.text)}
+                        onTextInput={e =>
+                            handleChange(e.nativeEvent.text, coords)
+                        }
                         value={text}
                     />
                     <IconWrapper
@@ -62,13 +78,17 @@ const SearchPage = () => {
                     />
                 </SearchBar>
 
-                <ButtonFilters>
+                <ButtonGetLocation
+                    onPress={() =>
+                        getLocation(location => setCoords(location))
+                    }>
                     <IconWrapper
+                        color={coords ? colorPrimary : undefined}
                         lib={IconLib.MATERIAL_COMMUNITY}
-                        name={'filter-variant'}
+                        name={'crosshairs-gps'}
                         size={24}
                     />
-                </ButtonFilters>
+                </ButtonGetLocation>
             </SearchBarContainer>
         </PageHead>
     );
@@ -81,6 +101,6 @@ const SearchPage = () => {
         />
     );
     return <Page body={Body} bodyScrollable={false} />;
-};
+}
 
 export default SearchPage;

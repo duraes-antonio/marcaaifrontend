@@ -79,7 +79,7 @@ export const TabsBottom = () => {
     // TODO: SUbstituir componentes pelos componentes reais
     return (
         <Tab.Navigator
-            initialRouteName={RouteName.HOME}
+            initialRouteName={RouteName.SEARCH}
             tabBarOptions={tabsOptions}
             lazy>
             <Tab.Screen
