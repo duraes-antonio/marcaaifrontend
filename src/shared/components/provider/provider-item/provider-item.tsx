@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React from 'react';
 import {
     IProvider,
     providerCategoryName,
@@ -18,8 +18,7 @@ import {useDispatch} from 'react-redux';
 import {actionsUser} from '../../../store/modules/user/actions';
 import TagWorkdayStatus from '../../tag/tag-workday';
 import TagDistance from '../../tag/tag-distance';
-import {SharedElement} from 'react-navigation-shared-element';
-import {CustomImage} from '../../general/image';
+import {Image} from 'react-native';
 
 function ProviderItem(props: {
     provider: IProvider;
@@ -45,22 +44,17 @@ function ProviderItem(props: {
                 lib={IconLib.MATERIAL_COMMUNITY}
                 name={'heart'}
             />
-            <SharedElement id={provider.id}>
-                <CustomImage
-                    uri={provider.imageUrl ?? ''}
-                    width={100}
-                    height={100}
-                />
-            </SharedElement>
+            <Image
+                source={{uri: provider.imageUrl ?? ''}}
+                style={{width: 100, height: 100}}
+                resizeMode="contain"
+                nativeID={provider.id}
+            />
             <ProviderInfo>
-                <SharedElement id={`${provider.id}-title`}>
-                    <ProviderName>{provider.name}</ProviderName>
-                </SharedElement>
-                <SharedElement id={`${provider.id}-category`}>
-                    <ProviderCategoryName>
-                        {providerCategoryName[provider.category]}
-                    </ProviderCategoryName>
-                </SharedElement>
+                <ProviderName>{provider.name}</ProviderName>
+                <ProviderCategoryName>
+                    {providerCategoryName[provider.category]}
+                </ProviderCategoryName>
                 <Tags>
                     <TagWorkdayStatus
                         status={provider.workStatus}
@@ -77,4 +71,4 @@ function ProviderItem(props: {
     );
 }
 
-export default memo(ProviderItem);
+export default ProviderItem;

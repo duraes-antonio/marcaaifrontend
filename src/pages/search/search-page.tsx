@@ -94,7 +94,6 @@ function SearchPage(): JSX.Element {
     );
     const Body = (
         <ProviderList
-            navigation={navigation}
             header={Header}
             loading={loading}
             onRefresh={() => searchProviders(text)}

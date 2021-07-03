@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import styled from 'styled-components/native';
 
 export const styles = StyleSheet.create({
@@ -34,8 +34,10 @@ export const ContainerSteps = styled.View`
     margin-top: 5px;
 `;
 
+type ViewProps = StyleProp<ViewStyle> & {backgroundColor: string};
+
 export const StepBar = styled.View`
-    background-color: ${props => props.style?.backgroundColor};
+    background-color: ${props => (props.style as ViewProps)?.backgroundColor};
     height: 4px;
     border-radius: 5px;
     width: 24%;

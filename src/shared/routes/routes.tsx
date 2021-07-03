@@ -1,4 +1,3 @@
-import {NavigationContainer} from '@react-navigation/native';
 import Login from '../../pages/login/login';
 import React from 'react';
 import Signup from '../../pages/signup/signup';
@@ -6,7 +5,8 @@ import PasswordRecover from '../../pages/auth/password-recover/password-recover'
 import PasswordRedefinition from '../../pages/auth/password-redefinition/password-redefinition';
 import {TabsBottom} from '../components/bottom-tabs/tabs-bottom';
 import ProviderDetails from '../../pages/provider-details/provider-details';
-import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
 export enum RouteName {
     LOGIN = 'login',
@@ -18,30 +18,11 @@ export enum RouteName {
     FAVORITES = 'favorites',
     PROFILE = 'profile',
     CREATE = 'create',
-    PROVIDER = 'provider',
+    PROVIDER = 'ProviderDetails',
 }
 
-const Stack = createSharedElementStackNavigator();
+const Stack = createStackNavigator();
 
-const config = {
-    animation: 'spring',
-    config: {
-        stiffness: 1000,
-        damping: 500,
-        mass: 3,
-        overshootClamping: true,
-        restDisplacementThreshold: 0.01,
-        restSpeedThreshold: 0.01,
-    },
-};
-
-const options = {
-    headerBackTitleVisible: false,
-    cardStyleInterpolator: ({current: {progress}}) => {
-        return {};
-    },
-    config,
-};
 export const Routes = () => (
     <NavigationContainer>
         <Stack.Navigator
@@ -53,7 +34,6 @@ export const Routes = () => (
             <Stack.Screen
                 name={RouteName.PROVIDER}
                 component={ProviderDetails}
-                options={() => options}
             />
             <Stack.Screen
                 name={RouteName.PASSWORD_RECOVER}

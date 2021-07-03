@@ -1,11 +1,10 @@
-import React, {memo} from 'react';
+import React from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {IdType} from '../../shared/store/types';
 import {RouteName} from '../../shared/routes/routes';
 import {IProvider} from '../../domain/entities/provider';
-import {SharedElement} from 'react-navigation-shared-element';
-import {CustomImage} from '../../shared/components/general/image';
+import {Image} from 'react-native';
 
 type ProviderParams = {
     [RouteName.PROVIDER]: {id: IdType; item?: IProvider};
@@ -21,14 +20,12 @@ const avatarSize = 120;
 function ProviderDetails(props: ProviderPageProps): JSX.Element {
     const {params} = props.route;
     return (
-        <SharedElement id={`image-${params.id}`}>
-            <CustomImage
-                borderRadius={15}
-                height={avatarSize}
-                uri={params?.item?.imageUrl ?? ''}
-            />
-        </SharedElement>
+        <Image
+            source={{uri: params?.item?.imageUrl ?? ''}}
+            style={{width: avatarSize, height: avatarSize}}
+            nativeID={`${params.id}-dest`}
+        />
     );
 }
 
-export default memo(ProviderDetails);
+export default ProviderDetails;
