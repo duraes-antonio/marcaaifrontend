@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {
     IProvider,
     providerCategoryName,
 } from '../../../../domain/entities/provider';
 import {
-    Image,
     ProviderCategoryName,
     ProviderContainer,
     ProviderInfo,
@@ -17,10 +16,16 @@ import {IconLib} from '../../icon/icon-lib';
 import {colorLabel50, colorPrimary} from '../../../styles/global-styles';
 import {useDispatch} from 'react-redux';
 import {actionsUser} from '../../../store/modules/user/actions';
-import TagWorkPdayStatus from '../../tag/tag-workday';
+import TagWorkdayStatus from '../../tag/tag-workday';
 import TagDistance from '../../tag/tag-distance';
+import {SharedElement} from 'react-navigation-shared-element';
+import {CustomImage} from '../../general/image';
 
-const ProviderItem = (props: {provider: IProvider; liked: boolean}) => {
+function ProviderItem(props: {
+    provider: IProvider;
+    liked: boolean;
+    onPress: () => void;
+}): JSX.Element {
     const {provider, liked} = props;
     const dispatch = useDispatch();
     const toggleLike = () => {
@@ -30,21 +35,34 @@ const ProviderItem = (props: {provider: IProvider; liked: boolean}) => {
         dispatch(action);
     };
     return (
-        <ProviderContainer activeOpacity={3 / 4} style={styles.containerShadow}>
+        <ProviderContainer
+            activeOpacity={3 / 4}
+            onPress={props.onPress}
+            style={styles.containerShadow}>
             <ActionButton
                 onPress={() => toggleLike()}
                 style={{color: liked ? colorPrimary : colorLabel50}}
                 lib={IconLib.MATERIAL_COMMUNITY}
                 name={'heart'}
             />
-            <Image source={{uri: provider.imageUrl}} />
+            <SharedElement id={provider.id}>
+                <CustomImage
+                    uri={provider.imageUrl ?? ''}
+                    width={100}
+                    height={100}
+                />
+            </SharedElement>
             <ProviderInfo>
-                <ProviderName>{provider.name}</ProviderName>
-                <ProviderCategoryName>
-                    {providerCategoryName[provider.category]}
-                </ProviderCategoryName>
+                <SharedElement id={`${provider.id}-title`}>
+                    <ProviderName>{provider.name}</ProviderName>
+                </SharedElement>
+                <SharedElement id={`${provider.id}-category`}>
+                    <ProviderCategoryName>
+                        {providerCategoryName[provider.category]}
+                    </ProviderCategoryName>
+                </SharedElement>
                 <Tags>
-                    <TagWorkPdayStatus
+                    <TagWorkdayStatus
                         status={provider.workStatus}
                         style={styles.tagWorkday}
                     />
@@ -57,6 +75,6 @@ const ProviderItem = (props: {provider: IProvider; liked: boolean}) => {
             </ProviderInfo>
         </ProviderContainer>
     );
-};
+}
 
-export default ProviderItem;
+export default memo(ProviderItem);

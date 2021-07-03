@@ -17,7 +17,7 @@ const statusColor: {[key in WorkdayStatus]: string} = {
     [WorkdayStatus.UNKNOWN]: grey4,
 };
 
-function TagWorkPdayStatus(
+function TagWorkdayStatus(
     props: {status?: WorkdayStatus} & Omit<TagProps, 'children'>,
 ): JSX.Element {
     return (
@@ -29,4 +29,4 @@ function TagWorkPdayStatus(
     );
 }
 
-export default memo(TagWorkPdayStatus);
+export default memo(TagWorkdayStatus);
