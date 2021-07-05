@@ -3,6 +3,7 @@ import {
     colorLabel,
     colorPrimary,
     grey3,
+    robotoBold,
     robotoMedium,
     robotoRegular,
 } from '../../styles/global-styles';
@@ -13,6 +14,7 @@ const sizes = {
     title: 24,
     subtitle: 22,
     common: 15,
+    label: 12,
 };
 
 export const PageTitle = styled.Text`
@@ -34,6 +36,11 @@ export const CommonText = styled.Text`
 
 export const SemiBoldText = styled(CommonText)`
     font-family: ${robotoMedium};
+`;
+
+export const BoldText = styled(CommonText)`
+    font-family: ${robotoBold};
+    font-weight: bold;
 `;
 
 export const ActionTextBicolor = (

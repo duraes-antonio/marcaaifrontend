@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 import {TouchableOpacityProps} from 'react-native';
 import styled from 'styled-components/native';
 import {CommonText} from '../general/texts';
-import {grey4} from '../../styles/global-styles';
+import {colorLabel75} from '../../styles/global-styles';
 
 export interface TagProps extends TouchableOpacityProps {
     clickable?: boolean;
@@ -26,7 +26,10 @@ const Text = styled(CommonText)`
 function Tag(props: TagProps): JSX.Element {
     return (
         <Container
-            style={[props.style, {backgroundColor: props.color ?? grey4}]}
+            style={[
+                props.style,
+                {backgroundColor: props.color ?? colorLabel75},
+            ]}
             disabled={!props.clickable || !props.onPress}>
             <Text>{props.children}</Text>
         </Container>
