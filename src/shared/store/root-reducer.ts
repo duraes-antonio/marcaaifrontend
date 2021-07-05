@@ -4,6 +4,7 @@ import salon from './modules/salon/reducers';
 import {userReducer} from './modules/user/reducers';
 import appointments from './modules/appointments/reducer';
 import userInterfaceReducer from './modules/user-interface/reducer';
+import tempReducer from './modules/temp/reducer';
 
 export default combineReducers({
     appointments,
@@ -11,4 +12,5 @@ export default combineReducers({
     salon,
     user: userReducer,
     userInterface: userInterfaceReducer,
+    temp: tempReducer,
 });

@@ -3,6 +3,7 @@ import {AuthState} from './modules/auth/reducers';
 import {SalonState} from './modules/salon/reducers';
 import {UserState} from './modules/user/reducers';
 import {UserInterfaceState} from './modules/user-interface/reducer';
+import {TemporaryState} from './modules/temp/reducer';
 
 export type IdType = string;
 
@@ -10,8 +11,8 @@ export interface ReduxAction {
     type: string;
 }
 
-export interface ReduxActionWithValue<T> extends ReduxAction {
-    value: T;
+export interface ReduxActionWithValue<V, A = string> extends ReduxAction {
+    value: V;
 }
 
 export interface ReduxActionWithId extends ReduxActionWithValue<IdType> {
@@ -24,6 +25,7 @@ export interface RootState {
     salon: SalonState;
     user: UserState;
     userInterface: UserInterfaceState;
+    temp: TemporaryState;
 }
 
 export type State<T> = any;
