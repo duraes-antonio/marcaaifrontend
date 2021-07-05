@@ -4,10 +4,11 @@ import styled from 'styled-components/native';
 import {IProvider} from '../../../../domain/entities/provider';
 import ProviderItem from '../provider-item/provider-item';
 import {pagePaddingHorizontal} from '../../general/page/styles';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import reduxSelectors from '../../../store/root-selector';
 import {RouteName} from '../../../routes/routes';
 import {useNavigation} from '@react-navigation/native';
+import {actionsTemp} from '../../../store/modules/temp/actions';
 
 const ListContainer = styled.View`
     overflow: visible;
@@ -30,9 +31,12 @@ export interface ProviderListProps {
 
 const ProviderList = (props: ProviderListProps) => {
     const {providersFavorite} = useSelector(reduxSelectors.user);
+    const dispatch = useDispatch();
     const navigation = useNavigation();
-    const showDetails = (p: IProvider) =>
-        navigation.navigate(RouteName.PROVIDER, {id: p.id, item: p});
+    const showDetails = (p: IProvider) => {
+        dispatch(actionsTemp.selectProvider(p));
+        navigation.navigate(RouteName.PROVIDER);
+    };
 
     const favorites = new Set(providersFavorite);
     const renderItem = (data: {item: IProvider}) => (

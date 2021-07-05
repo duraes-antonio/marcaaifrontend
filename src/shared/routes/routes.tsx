@@ -18,7 +18,7 @@ export enum RouteName {
     FAVORITES = 'favorites',
     PROFILE = 'profile',
     CREATE = 'create',
-    PROVIDER = 'ProviderDetails',
+    PROVIDER = 'provider',
 }
 
 const Stack = createStackNavigator();

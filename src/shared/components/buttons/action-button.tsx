@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 });
 
 export interface ActionButtonProps extends IconProps {
-    containerStyle: ViewStyle;
+    containerStyle?: ViewStyle;
     containerShadow?: boolean;
     lib: IconLib;
     text?: string;
