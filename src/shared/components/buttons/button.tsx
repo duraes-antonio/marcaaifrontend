@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Button} from 'react-native-paper';
 import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
-import {colorPrimary, ralewaySemiBold} from '../../styles/global-styles';
-import styled from 'styled-components/native';
+import {colorPrimary, robotoMedium} from '../../styles/global-styles';
+import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 
 export interface ButtonProps {
     text: string;
@@ -12,51 +12,48 @@ export interface ButtonProps {
     disabled?: boolean;
     onPress: () => void;
     style?: StyleProp<ViewStyle>;
+    icon?: IconSource;
 }
 
-const _styles = StyleSheet.create({
-    button: {
+const styles = StyleSheet.create({
+    general: {
         height: 45,
         borderRadius: 25,
     },
     container: {
-        height: 45,
-        alignItems: 'center',
-        justifyContent: 'center',
+        height: '100%',
+        paddingHorizontal: 10,
     },
     label: {
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
+        fontFamily: robotoMedium,
+        fontWeight: '600',
+        fontSize: 16,
+        letterSpacing: 0,
     },
 });
 
-const ButtonText = styled.Text`
-    font-family: ${ralewaySemiBold};
-    font-weight: 600;
-`;
-
-const ButtonContained = (props: ButtonProps) => {
+export function ButtonContained(props: ButtonProps): JSX.Element {
     const {color, disabled, loading, onPress, text, style, uppercase} = {
         ...props,
         color: props.color || colorPrimary,
         disabled: props.disabled || false,
         uppercase: props.uppercase || false,
     } as ButtonProps;
-    const finalStyle = {...(style as StyleProp<any>), ..._styles.button};
     return (
         <Button
+            icon={props.icon}
             loading={loading}
             mode="contained"
             uppercase={uppercase}
             color={color}
             disabled={disabled || loading}
-            style={finalStyle}
-            contentStyle={_styles.container}
-            onPress={onPress}>
-            <ButtonText>{text}</ButtonText>
+            onPress={onPress}
+            contentStyle={styles.container}
+            labelStyle={styles.label}
+            style={[styles.general, style]}>
+            {text}
         </Button>
     );
-};
+}
 
-export default ButtonContained;
+export default memo(ButtonContained);

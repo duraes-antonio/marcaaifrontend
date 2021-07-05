@@ -13,14 +13,17 @@ export enum ProviderCategory {
     OTHER,
 }
 
-export interface IProvider extends NamedEntity {
+export interface IProviderBasic extends NamedEntity {
     coverUrl?: string;
     imageUrl?: string;
     category: ProviderCategory;
-    routine?: Workday;
-    exceptionalDays?: Workday[];
     workStatus?: WorkdayStatus;
     distanceInMeters?: number;
+}
+
+export interface IProvider extends IProviderBasic {
+    routine?: Workday;
+    exceptionalDays?: Workday[];
 }
 
 export type ProviderInput = Omit<IProvider, 'id'>;

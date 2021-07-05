@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 import {IconProps} from 'react-native-vector-icons/Icon';
 import styled from 'styled-components/native';
 import {colorLabel, robotoRegular} from '../../styles/global-styles';
@@ -30,15 +30,30 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         width: 'auto',
     },
+    containerShadow: {
+        elevation: 6,
+        shadowColor: 'rgba(0, 0, 0, .8)',
+    },
 });
 
-function ActionButton(
-    props: IconProps & {lib: IconLib; text?: string},
-): JSX.Element {
+export interface ActionButtonProps extends IconProps {
+    containerStyle: ViewStyle;
+    containerShadow?: boolean;
+    lib: IconLib;
+    text?: string;
+}
+
+function ActionButton(props: ActionButtonProps): JSX.Element {
+    const containerStyle = {
+        ...props.containerStyle,
+        ...(props.text ? styles.iconWithText : {}),
+        ...(props.containerShadow ? styles.containerShadow : {}),
+    };
     return (
         <ActionsContainer
+            activeOpacity={3 / 4}
             onPress={props.onPress}
-            style={props.text ? styles.iconWithText : undefined}>
+            style={containerStyle}>
             <IconWrapper {...props} lib={props.lib} size={20} />
             {props.text && <ActionText>{props.text}</ActionText>}
         </ActionsContainer>
