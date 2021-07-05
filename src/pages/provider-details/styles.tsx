@@ -54,6 +54,13 @@ export const TagsContainer = styled.View`
     margin-top: 5px;
 `;
 
+export const ContainerPage = styled.View`
+    align-items: center;
+    min-height: 100%;
+    flex: 1;
+    background-color: ${pageBackgroundColor};
+`;
+
 export const styles = StyleSheet.create({
     avatarImage: {
         borderRadius: 15,
@@ -70,4 +77,9 @@ export const styles = StyleSheet.create({
         right: 25,
         backgroundColor: 'white',
     },
+    showAddressButton: {
+        height: 50,
+        marginTop: 20,
+    },
+    tagWorkday: {marginRight: 5},
 });

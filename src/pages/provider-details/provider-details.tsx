@@ -1,5 +1,5 @@
-import React from 'react';
-import {RouteProp} from '@react-navigation/native';
+import React, {ReactNode} from 'react';
+import {RouteProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {IdType} from '../../shared/store/types';
 import {RouteName} from '../../shared/routes/routes';
@@ -11,6 +11,7 @@ import {Image} from 'react-native';
 import {
     avatarSize,
     AvatarWrapper,
+    ContainerPage,
     HeaderBottomBar,
     HeaderContainer,
     HeaderInfo,
@@ -24,9 +25,9 @@ import TagDistance from '../../shared/components/tag/tag-distance';
 import ActionButton from '../../shared/components/buttons/action-button';
 import {IconLib, IconWrapper} from '../../shared/components/icon/icon-lib';
 import EmptyImageSvg from '../../../assets/vectors/empty_image.svg';
-import styled from 'styled-components/native';
 import ButtonContained from '../../shared/components/buttons/button';
-import {pageBackgroundColor} from '../../shared/components/general/page/styles';
+import reduxSelectors from '../../shared/store/root-selector';
+import {useSelector} from 'react-redux';
 
 type ProviderParams = {
     [RouteName.PROVIDER]: {id: IdType; item: IProviderBasic};
@@ -65,7 +66,7 @@ function Header(props: {provider: IProviderBasic}): JSX.Element {
                     </ProviderCategory>
                     <TagsContainer>
                         <TagWorkdayStatus
-                            style={{marginRight: 5}}
+                            style={styles.tagWorkday}
                             status={workStatus}
                         />
                         {distanceInMeters && (
@@ -84,38 +85,35 @@ function Header(props: {provider: IProviderBasic}): JSX.Element {
     );
 }
 
-const ContainerPage = styled.View`
-    align-items: center;
-    min-height: 100%;
-    flex: 1;
-    background-color: ${pageBackgroundColor};
-`;
-
-function ProviderDetails(props: ProviderPageProps): JSX.Element {
+function ProviderDetails(props: ProviderPageProps): ReactNode {
     const {params} = props.route;
+    const provider = useSelector(reduxSelectors.providerSelected);
+    const navigation = useNavigation();
     const showAddress = () => null;
+
+    if (!provider) {
+        navigation.navigate(RouteName.SEARCH);
+    }
+
     return (
-        <ContainerPage>
-            <Header provider={params.item} />
-            <ButtonContained
-                icon={({size, color}) => (
-                    <IconWrapper
-                        size={24}
-                        color={color}
-                        name={'map-marker-alt'}
-                        lib={IconLib.FONT_AWESOME_5}
-                    />
-                )}
-                style={{
-                    height: 50,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginTop: 20,
-                }}
-                text={'Ver endereço'}
-                onPress={showAddress}
-            />
-        </ContainerPage>
+        provider && (
+            <ContainerPage>
+                <Header provider={provider} />
+                <ButtonContained
+                    icon={({color}) => (
+                        <IconWrapper
+                            size={24}
+                            color={color}
+                            name={'map-marker-alt'}
+                            lib={IconLib.FONT_AWESOME_5}
+                        />
+                    )}
+                    style={styles.showAddressButton}
+                    text={'Ver endereço'}
+                    onPress={showAddress}
+                />
+            </ContainerPage>
+        )
     );
 }
 
