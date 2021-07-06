@@ -57,6 +57,11 @@ export class ProviderServiceMock
                 }),
                 workStatus: WorkdayStatus.UNKNOWN,
                 distanceInMeters: Math.random() * 5000,
+                coversUrl: [
+                    'https://retaildesignblog.net/wp-content/uploads/2012/02/YOUD-beauty-center-All-In-Living-Rotterdam-720x480.jpg',
+                    'https://www.katiavelo.com.br/wp-content/uploads/2018/07/1-51.jpg',
+                    'https://informa.life/wp-content/uploads/2019/11/Revista-Sul-Life-5-Charllene.jpg',
+                ],
             });
         },
     );

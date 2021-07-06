@@ -14,7 +14,7 @@ export enum ProviderCategory {
 }
 
 export interface IProviderBasic extends NamedEntity {
-    coverUrl?: string;
+    coversUrl?: string[];
     imageUrl?: string;
     category: ProviderCategory;
     workStatus?: WorkdayStatus;
@@ -30,7 +30,7 @@ export type ProviderInput = Omit<IProvider, 'id'>;
 
 export class Provider implements IProvider {
     readonly category = ProviderCategory.OTHER;
-    readonly coverUrl?: string;
+    readonly coversUrl?: string[];
     readonly id!: IdType;
     readonly imageUrl?: string;
     readonly name!: string;
