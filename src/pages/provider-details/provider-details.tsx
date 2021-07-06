@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {IdType} from '../../shared/store/types';
@@ -28,6 +28,7 @@ import EmptyImageSvg from '../../../assets/vectors/empty_image.svg';
 import ButtonContained from '../../shared/components/buttons/button';
 import reduxSelectors from '../../shared/store/root-selector';
 import {useSelector} from 'react-redux';
+import SwiperImages from './swiper-images';
 
 type ProviderParams = {
     [RouteName.PROVIDER]: {id: IdType; item: IProviderBasic};
@@ -39,10 +40,27 @@ export interface ProviderPageProps {
 }
 
 function Header(props: {provider: IProviderBasic}): JSX.Element {
-    const {imageUrl, workStatus, name, category, id, distanceInMeters} =
-        props.provider;
+    const {
+        coversUrl,
+        imageUrl,
+        workStatus,
+        name,
+        category,
+        id,
+        distanceInMeters,
+    } = props.provider;
+    console.log(coversUrl);
     return (
         <HeaderContainer>
+            {coversUrl?.length && (
+                <SwiperImages
+                    images={coversUrl}
+                    style={{
+                        height: 270,
+                        width: '100%',
+                    }}
+                />
+            )}
             <HeaderBottomBar>
                 <AvatarWrapper style={styles.avatarImage}>
                     {!imageUrl ? (
@@ -85,35 +103,33 @@ function Header(props: {provider: IProviderBasic}): JSX.Element {
     );
 }
 
-function ProviderDetails(props: ProviderPageProps): ReactNode {
-    const {params} = props.route;
+function ProviderDetails(props: ProviderPageProps) {
     const provider = useSelector(reduxSelectors.providerSelected);
     const navigation = useNavigation();
     const showAddress = () => null;
 
     if (!provider) {
         navigation.navigate(RouteName.SEARCH);
+        return <></>;
     }
 
     return (
-        provider && (
-            <ContainerPage>
-                <Header provider={provider} />
-                <ButtonContained
-                    icon={({color}) => (
-                        <IconWrapper
-                            size={24}
-                            color={color}
-                            name={'map-marker-alt'}
-                            lib={IconLib.FONT_AWESOME_5}
-                        />
-                    )}
-                    style={styles.showAddressButton}
-                    text={'Ver endereço'}
-                    onPress={showAddress}
-                />
-            </ContainerPage>
-        )
+        <ContainerPage>
+            <Header provider={provider as IProviderBasic} />
+            <ButtonContained
+                icon={({color}) => (
+                    <IconWrapper
+                        size={24}
+                        color={color}
+                        name={'map-marker-alt'}
+                        lib={IconLib.FONT_AWESOME_5}
+                    />
+                )}
+                style={styles.showAddressButton}
+                text={'Ver endereço'}
+                onPress={showAddress}
+            />
+        </ContainerPage>
     );
 }
 
