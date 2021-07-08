@@ -76,10 +76,9 @@ const CentralIcon = () => (
 export const TabsBottom = () => {
     const dispatch = useDispatch();
     dispatch(actionsAppointment.allRequest());
-    // TODO: SUbstituir componentes pelos componentes reais
     return (
         <Tab.Navigator
-            initialRouteName={RouteName.SEARCH}
+            initialRouteName={RouteName.PROVIDER}
             tabBarOptions={tabsOptions}
             lazy>
             <Tab.Screen

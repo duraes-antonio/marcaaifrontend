@@ -28,7 +28,7 @@ import EmptyImageSvg from '../../../assets/vectors/empty_image.svg';
 import ButtonContained from '../../shared/components/buttons/button';
 import reduxSelectors from '../../shared/store/root-selector';
 import {useSelector} from 'react-redux';
-import SwiperImages from './swiper-images';
+import SwiperImages from '../../shared/components/swiper-images/swiper-images';
 
 type ProviderParams = {
     [RouteName.PROVIDER]: {id: IdType; item: IProviderBasic};
@@ -63,7 +63,7 @@ function Header(props: {provider: IProviderBasic}): JSX.Element {
             )}
             <HeaderBottomBar>
                 <AvatarWrapper style={styles.avatarImage}>
-                    {!imageUrl ? (
+                    {imageUrl ? (
                         <Image
                             source={{uri: imageUrl ?? ''}}
                             style={{width: avatarSize, height: avatarSize}}
