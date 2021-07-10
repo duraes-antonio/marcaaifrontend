@@ -56,9 +56,8 @@ export const TagsContainer = styled.View`
 
 export const ContainerPage = styled.View`
     align-items: center;
-    min-height: 100%;
-    flex: 1;
     background-color: ${pageBackgroundColor};
+    padding-bottom: 20px;
 `;
 
 export const styles = StyleSheet.create({
@@ -77,9 +76,13 @@ export const styles = StyleSheet.create({
         right: 25,
         backgroundColor: 'white',
     },
+    serviceList: {
+        marginTop: 15,
+        paddingTop: 10,
+    },
     showAddressButton: {
         height: 50,
-        marginTop: 20,
+        marginTop: 15,
     },
     tagWorkday: {marginRight: 5},
 });

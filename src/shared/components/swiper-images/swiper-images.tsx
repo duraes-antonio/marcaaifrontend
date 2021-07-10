@@ -11,15 +11,12 @@ export interface SwiperImagesProps {
 
 const {width} = Dimensions.get('window');
 
-function SwiperIndicators(props: {
-    currentIndex: number;
-    length: number;
-}): JSX.Element {
+function SwiperIndicators(props: {currentIndex: number; length: number}) {
     const iterable = useMemo(
         () => new Array<number>(props.length).fill(0),
         [props.length],
     );
-    return (
+    return props.length > 1 ? (
         <IndicadorContainer>
             {iterable.map((_, i) => (
                 <IndicatorDot
@@ -33,7 +30,7 @@ function SwiperIndicators(props: {
                 />
             ))}
         </IndicadorContainer>
-    );
+    ) : null;
 }
 
 function SwiperImages(props: SwiperImagesProps): JSX.Element {

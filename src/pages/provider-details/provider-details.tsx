@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {IdType} from '../../shared/store/types';
 import {RouteName} from '../../shared/routes/routes';
 import {
+    IProvider,
     IProviderBasic,
     providerCategoryName,
 } from '../../domain/entities/provider';
@@ -29,6 +30,9 @@ import ButtonContained from '../../shared/components/buttons/button';
 import reduxSelectors from '../../shared/store/root-selector';
 import {useSelector} from 'react-redux';
 import SwiperImages from '../../shared/components/swiper-images/swiper-images';
+import ServiceList from '../../shared/components/service/service-list';
+import {services} from '../../data/services/di';
+import {Nullable} from '../../shared/types/general';
 
 type ProviderParams = {
     [RouteName.PROVIDER]: {id: IdType; item: IProviderBasic};
@@ -49,7 +53,6 @@ function Header(props: {provider: IProviderBasic}): JSX.Element {
         id,
         distanceInMeters,
     } = props.provider;
-    console.log(coversUrl);
     return (
         <HeaderContainer>
             {coversUrl?.length && (
@@ -105,15 +108,33 @@ function Header(props: {provider: IProviderBasic}): JSX.Element {
 
 function ProviderDetails(props: ProviderPageProps) {
     const provider = useSelector(reduxSelectors.providerSelected);
+    const [providerComplete, setProviderComplete] =
+        useState<Nullable<IProvider>>();
+    const [loading, setLoading] = useState(true);
     const navigation = useNavigation();
     const showAddress = () => null;
 
-    if (!provider) {
-        navigation.navigate(RouteName.SEARCH);
-        return <></>;
-    }
+    useEffect(() => {
+        if (!provider) {
+            navigation.navigate(RouteName.SEARCH);
+            return;
+        }
+    }, [navigation, provider]);
 
-    return (
+    const getAndSetProvider = useCallback(async () => {
+        setLoading(true);
+        if (!provider?.id) {
+            return;
+        }
+        setProviderComplete(await services.provider.get(provider.id));
+        setLoading(false);
+    }, [provider?.id]);
+
+    useEffect(() => {
+        getAndSetProvider();
+    }, [getAndSetProvider]);
+
+    const _Header = (
         <ContainerPage>
             <Header provider={provider as IProviderBasic} />
             <ButtonContained
@@ -130,6 +151,14 @@ function ProviderDetails(props: ProviderPageProps) {
                 onPress={showAddress}
             />
         </ContainerPage>
+    );
+    return (
+        <ServiceList
+            items={providerComplete?.services ?? []}
+            header={_Header}
+            loading={loading}
+            onRefresh={getAndSetProvider}
+        />
     );
 }
 
