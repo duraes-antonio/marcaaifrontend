@@ -2,6 +2,7 @@ import {NamedEntity} from './general';
 import {IdType} from '../../shared/store/types';
 import {Workday, WorkdayStatus} from './schedule';
 import {utilDate} from '../../shared/util/date';
+import {Service} from './service';
 
 export enum ProviderCategory {
     BARBER,
@@ -24,6 +25,7 @@ export interface IProviderBasic extends NamedEntity {
 export interface IProvider extends IProviderBasic {
     routine?: Workday;
     exceptionalDays?: Workday[];
+    services: Service[];
 }
 
 export type ProviderInput = Omit<IProvider, 'id'>;
@@ -37,6 +39,8 @@ export class Provider implements IProvider {
     readonly routine!: Workday;
     readonly exceptionalDays: Workday[] = [];
     readonly workStatus: WorkdayStatus = WorkdayStatus.UNKNOWN;
+    readonly distanceInMeters?: number;
+    readonly services: Service[] = [];
 
     constructor(data: IProvider) {
         Object.assign(this, data);

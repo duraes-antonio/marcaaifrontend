@@ -62,6 +62,56 @@ export class ProviderServiceMock
                     'https://www.katiavelo.com.br/wp-content/uploads/2018/07/1-51.jpg',
                     'https://informa.life/wp-content/uploads/2019/11/Revista-Sul-Life-5-Charllene.jpg',
                 ],
+                services: [
+                    {
+                        name: 'Massagem com pedras nórdicas direto da Noruega',
+                        id: this.generateGuid(),
+                        provider: {name: p.name, id: this.generateGuid()},
+                        price: 29.99,
+                        rating: 4.5,
+                        description:
+                            'Aliquam accumsan gravida turpis, sed feugiat ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut sollicitudin diam ac tellus varius, ac tincidunt mauris laoreet. Aliquam ipsum enim, finibus eget est eget, tristique tristique urna. Phasellus vulputate venenatis magna, nec eleifend purus faucibus vitae. Curabitur id erat purus. Suspendisse luctus nec ante convallis eleifend. Ut ac nisl congue, tincidunt diam eget, ornare quam.\n\nNunc sollicitudin magna nec ante tempus blandit. Sed sit amet ipsum ut velit pretium maximus. Praesent a tortor faucibus, faucibus nisl in, convallis mi. Proin et tellus consequat, interdum urna a, iaculis est. Donec vulputate mi nulla, sit amet aliquet metus porttitor non. Etiam ipsum nulla, euismod sit amet finibus vitae, hendrerit interdum dolor. Phasellus lacus quam, vestibulum quis lectus pellentesque, feugiat hendrerit odio. Etiam sit amet tincidunt dolor, vel dignissim augue.',
+                        coversUrl: [
+                            'https://retaildesignblog.net/wp-content/uploads/2012/02/YOUD-beauty-center-All-In-Living-Rotterdam-720x480.jpg',
+                            'https://www.katiavelo.com.br/wp-content/uploads/2018/07/1-51.jpg',
+                            'https://informa.life/wp-content/uploads/2019/11/Revista-Sul-Life-5-Charllene.jpg',
+                        ],
+                        imageUrl:
+                            'https://dicasdemassagem.com/wp-content/uploads/beneficios-da-massagem-com-pedras-quentes.jpg',
+                    },
+                    {
+                        name: 'Massagem com pedras nórdicas direto da Noruega',
+                        id: this.generateGuid(),
+                        provider: {name: p.name, id: this.generateGuid()},
+                        price: 49.99,
+                        rating: 3.7765,
+                        description:
+                            'Aliquam accumsan gravida turpis, sed feugiat ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut sollicitudin diam ac tellus varius, ac tincidunt mauris laoreet. Aliquam ipsum enim, finibus eget est eget, tristique tristique urna. Phasellus vulputate venenatis magna, nec eleifend purus faucibus vitae. Curabitur id erat purus. Suspendisse luctus nec ante convallis eleifend. Ut ac nisl congue, tincidunt diam eget, ornare quam.\n\nNunc sollicitudin magna nec ante tempus blandit. Sed sit amet ipsum ut velit pretium maximus. Praesent a tortor faucibus, faucibus nisl in, convallis mi. Proin et tellus consequat, interdum urna a, iaculis est. Donec vulputate mi nulla, sit amet aliquet metus porttitor non. Etiam ipsum nulla, euismod sit amet finibus vitae, hendrerit interdum dolor. Phasellus lacus quam, vestibulum quis lectus pellentesque, feugiat hendrerit odio. Etiam sit amet tincidunt dolor, vel dignissim augue.',
+                        coversUrl: [
+                            'https://retaildesignblog.net/wp-content/uploads/2012/02/YOUD-beauty-center-All-In-Living-Rotterdam-720x480.jpg',
+                            'https://www.katiavelo.com.br/wp-content/uploads/2018/07/1-51.jpg',
+                            'https://informa.life/wp-content/uploads/2019/11/Revista-Sul-Life-5-Charllene.jpg',
+                        ],
+                        imageUrl:
+                            'https://dicasdemassagem.com/wp-content/uploads/beneficios-da-massagem-com-pedras-quentes.jpg',
+                    },
+                    {
+                        name: 'Massagem com pedras nórdicas direto da Noruega',
+                        id: this.generateGuid(),
+                        provider: {name: p.name, id: this.generateGuid()},
+                        price: 49.99,
+                        rating: 3.7765,
+                        description:
+                            'Aliquam accumsan gravida turpis, sed feugiat ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut sollicitudin diam ac tellus varius, ac tincidunt mauris laoreet. Aliquam ipsum enim, finibus eget est eget, tristique tristique urna. Phasellus vulputate venenatis magna, nec eleifend purus faucibus vitae. Curabitur id erat purus. Suspendisse luctus nec ante convallis eleifend. Ut ac nisl congue, tincidunt diam eget, ornare quam.\n\nNunc sollicitudin magna nec ante tempus blandit. Sed sit amet ipsum ut velit pretium maximus. Praesent a tortor faucibus, faucibus nisl in, convallis mi. Proin et tellus consequat, interdum urna a, iaculis est. Donec vulputate mi nulla, sit amet aliquet metus porttitor non. Etiam ipsum nulla, euismod sit amet finibus vitae, hendrerit interdum dolor. Phasellus lacus quam, vestibulum quis lectus pellentesque, feugiat hendrerit odio. Etiam sit amet tincidunt dolor, vel dignissim augue.',
+                        coversUrl: [
+                            'https://retaildesignblog.net/wp-content/uploads/2012/02/YOUD-beauty-center-All-In-Living-Rotterdam-720x480.jpg',
+                            'https://www.katiavelo.com.br/wp-content/uploads/2018/07/1-51.jpg',
+                            'https://informa.life/wp-content/uploads/2019/11/Revista-Sul-Life-5-Charllene.jpg',
+                        ],
+                        imageUrl:
+                            'https://dicasdemassagem.com/wp-content/uploads/beneficios-da-massagem-com-pedras-quentes.jpg',
+                    },
+                ],
             });
         },
     );
@@ -78,7 +128,7 @@ export class ProviderServiceMock
     }
 
     get(providerId: IdType): Promise<IProvider | null> {
-        return this.mockRequest(providerId).then(() => null);
+        return later(this.providersMock[0]);
     }
 
     getFavorites(): Promise<IProvider[]> {
