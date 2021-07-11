@@ -47,9 +47,17 @@ const styles = StyleSheet.create({
     },
 });
 
-function ServiceItem(props: {service: Service}): JSX.Element {
+export interface ServiceItemProps {
+    service: Service;
+    onSelect: (s: Service) => void;
+}
+
+function ServiceItem(props: ServiceItemProps): JSX.Element {
     return (
-        <Container activeOpacity={3 / 5} style={styles.shadow}>
+        <Container
+            activeOpacity={3 / 5}
+            style={styles.shadow}
+            onPress={() => props.onSelect(props.service)}>
             <Image
                 style={styles.serviceImage}
                 source={{uri: props.service.imageUrl}}

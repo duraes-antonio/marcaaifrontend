@@ -1,10 +1,13 @@
 import {NamedEntity} from './general';
 import {StringNullable} from '../../shared/types/general';
 
-export interface IUser extends NamedEntity {
+export interface UserResume extends NamedEntity {
+    imageUrl?: StringNullable;
+}
+
+export interface IUser extends UserResume {
     email: string;
     username: string;
-    imageUrl?: StringNullable;
 }
 
 export class User implements IUser {
@@ -22,8 +25,3 @@ export class User implements IUser {
         this.username = data.username;
     }
 }
-
-export type LoginData = {
-    email: string;
-    password: string;
-};

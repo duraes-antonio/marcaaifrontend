@@ -7,6 +7,7 @@ import {TabsBottom} from '../components/bottom-tabs/tabs-bottom';
 import ProviderDetails from '../../pages/provider-details/provider-details';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import ServiceDetails from '../../pages/service/service-details';
 
 export enum RouteName {
     LOGIN = 'login',
@@ -19,6 +20,7 @@ export enum RouteName {
     PROFILE = 'profile',
     CREATE = 'create',
     PROVIDER = 'provider',
+    SERVICE = 'service',
 }
 
 const Stack = createStackNavigator();
@@ -35,6 +37,7 @@ export const Routes = () => (
                 name={RouteName.PROVIDER}
                 component={ProviderDetails}
             />
+            <Stack.Screen name={RouteName.SERVICE} component={ServiceDetails} />
             <Stack.Screen
                 name={RouteName.PASSWORD_RECOVER}
                 component={PasswordRecover}

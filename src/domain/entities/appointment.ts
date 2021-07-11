@@ -3,6 +3,7 @@ import {utilDate} from '../../shared/util/date';
 import dayjs from 'dayjs';
 import {IdType} from '../../shared/store/types';
 import {SalonService} from './service';
+import {UserResume} from './user';
 
 export interface ServiceProvider extends NamedEntity {}
 
@@ -63,8 +64,8 @@ export interface RatingAppointmentInput {
     comment?: string;
 }
 
-export interface RatingAppointment extends Entity, RatingAppointmentInput {
-    userId: IdType;
+export interface AppointmentRating extends Entity, RatingAppointmentInput {
+    user: UserResume;
     date: Date;
 }
 

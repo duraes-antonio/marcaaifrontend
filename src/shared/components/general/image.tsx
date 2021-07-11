@@ -1,5 +1,7 @@
 import React from 'react';
 import {Image, ImageProps, StyleSheet} from 'react-native';
+import EmptyImageSvg from '../../../../assets/vectors/empty_image.svg';
+import {StringNullable} from '../../types/general';
 
 export type ImageCustomProps = {
     height?: number;
@@ -8,7 +10,7 @@ export type ImageCustomProps = {
     borderRadius?: number;
     borderColor?: string;
     borderWidth?: number;
-    uri: string;
+    uri?: StringNullable;
 };
 
 export const CustomImage = (
@@ -25,5 +27,13 @@ export const CustomImage = (
             borderWidth: borderWidth,
         },
     });
-    return <Image source={{uri}} style={[props.style, styles.image]} />;
+    return !props.uri ? (
+        <EmptyImageSvg
+            width={styles.image.width ? styles.image.width - 20 : 0}
+            height={styles.image.height ? styles.image.height - 20 : 0}
+        />
+    ) : (
+        // @ts-ignore
+        <Image source={{uri}} style={[styles.image, props.style]} />
+    );
 };

@@ -1,5 +1,5 @@
 import {
-    RatingAppointment,
+    AppointmentRating,
     RatingAppointmentInput,
     UserAppointment,
     UserAppointmentInput,
@@ -13,7 +13,7 @@ export interface AppointmentService {
 
     getAll(): Promise<UserAppointment[]>;
 
-    getReview(reviewId: IdType): Promise<RatingAppointment>;
+    getReview(reviewId: IdType): Promise<AppointmentRating>;
 
     addReview(data: RatingAppointmentInput): Promise<IdType>;
 

@@ -1,8 +1,8 @@
 import {AppointmentService} from '../../../domain/use-cases/appointment';
 import {
+    AppointmentRating,
     AppointmentStatus,
     IUserAppointment,
-    RatingAppointment,
     RatingAppointmentInput,
     UserAppointment,
     UserAppointmentInput,
@@ -66,14 +66,17 @@ export class ApointmentServiceMock
         );
     }
 
-    getReview(reviewId: IdType): Promise<RatingAppointment> {
-        return later<RatingAppointment>({
+    getReview(reviewId: IdType): Promise<AppointmentRating> {
+        return later<AppointmentRating>({
             value: 4,
             id: reviewId,
             comment: 'Muito bom o atendimento e tals',
             date: new Date(2021, 1, 12),
             appointmentId: this.generateGuid(),
-            userId: this.generateGuid(),
+            user: {
+                id: this.generateGuid(),
+                name: 'Nelson da Silva',
+            },
         });
     }
 

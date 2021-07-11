@@ -65,10 +65,10 @@ export const styles = StyleSheet.create({
         borderRadius: 15,
         height: avatarSize,
         width: avatarSize,
-        elevation: 9,
+        elevation: 10,
         shadowColor: 'rgba(0, 0, 0, .75)',
-        overflow: 'hidden',
         top: -18,
+        overflow: 'hidden',
     },
     favoriteButton: {
         position: 'absolute',

@@ -11,6 +11,8 @@ import {User} from '../../domain/entities/user';
 import {ResetPasswordService} from '../../domain/use-cases/reset-password';
 import {ProviderService} from '../../domain/use-cases/provider';
 import {ProviderServiceMock} from './provider/provider-service.mock';
+import {ReviewService} from '../../domain/use-cases/review';
+import {ReviewServiceMock} from './review/review-service.mock';
 
 export interface ServiceCollection {
     auth: UserAuth;
@@ -18,6 +20,7 @@ export interface ServiceCollection {
     appointmentStorage: ItemStorage<IUserAppointment[]>;
     provider: ProviderService;
     resetPassword: ResetPasswordService;
+    review: ReviewService;
     userStorage: ItemStorage<User>;
 }
 
@@ -28,5 +31,6 @@ export const services: ServiceCollection = {
     appointmentStorage: new AppointmentAsyncStorageService(),
     provider: new ProviderServiceMock(),
     resetPassword: new ResetPasswordServiceMock(),
+    review: new ReviewServiceMock(),
     userStorage: new UserAsyncStorageService(),
 };

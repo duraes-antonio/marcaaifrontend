@@ -5,7 +5,7 @@ import {Container, IndicadorContainer, IndicatorDot, styles} from './styles';
 import {colorGreen} from '../../styles/global-styles';
 
 export interface SwiperImagesProps {
-    style: ViewStyle;
+    style?: ViewStyle;
     images: string[];
 }
 
@@ -46,12 +46,12 @@ function SwiperImages(props: SwiperImagesProps): JSX.Element {
                 <CustomImage
                     uri={info.item}
                     width={width}
-                    height={props.style.height as number}
+                    height={props.style?.height as number}
                     style={styles.image}
                 />
             );
         },
-        [props.style.height],
+        [props.style?.height],
     );
     const keyExtractor = useCallback(
         (_, _index: number) => _index.toString(),
@@ -74,5 +74,12 @@ function SwiperImages(props: SwiperImagesProps): JSX.Element {
         </Container>
     );
 }
+
+SwiperImages.defaultProps = {
+    style: {
+        height: 270,
+        width: '100%',
+    },
+} as SwiperImagesProps;
 
 export default memo(SwiperImages);
