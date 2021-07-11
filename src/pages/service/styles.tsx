@@ -9,6 +9,7 @@ import {
     colorGreen,
     colorLabel,
     colorPrimary,
+    robotoLight,
 } from '../../shared/styles/global-styles';
 import {
     pageBackgroundColor,
@@ -66,7 +67,52 @@ export const Page = styled.ScrollView`
     background-color: ${pageBackgroundColor};
 `;
 
+export const ReviewContainer = styled.View`
+    background-color: white;
+    border-radius: 10px;
+    margin: 5px 0 10px;
+    padding: 14px 14px 20px;
+`;
+
+export const ReviewInfo = styled.View`
+    flex: 1;
+    margin-left: 15px;
+`;
+
+export const ReviewInfoHeader = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+`;
+
+export const SmallText = styled(CommonText)`
+    font-size: 12px;
+    color: ${colorLabel};
+`;
+
+export const CommentText = styled(CommonText)`
+    font-size: 14px;
+    color: ${colorLabel};
+    line-height: ${14 * 1.25}px;
+    font-family: ${robotoLight};
+    margin-bottom: 5px;
+`;
+
 export const styles = StyleSheet.create({
+    list: {
+        backgroundColor: pageBackgroundColor,
+    },
+    item: {
+        elevation: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        flexDirection: 'row',
+    },
+    itemWrapper: {
+        paddingHorizontal: pagePaddingHorizontal,
+    },
+    image: {
+        marginTop: 7,
+    },
     button: {
         marginTop: 20,
         marginBottom: 20,
