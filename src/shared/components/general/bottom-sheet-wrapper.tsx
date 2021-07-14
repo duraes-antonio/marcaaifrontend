@@ -1,41 +1,91 @@
-import React, {memo, useEffect, useRef} from 'react';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import {useSelector} from 'react-redux';
+import React, {
+    memo,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import reduxSelectors from '../../store/root-selector';
+import {StyleSheet} from 'react-native';
+import BottomSheet, {
+    BottomSheetBackdrop,
+    BottomSheetView,
+} from '@gorhom/bottom-sheet';
+import {actionsUI} from '../../store/modules/user-interface/actions';
+
+enum BottomSheetState {
+    OPENED,
+    CLOSED,
+}
 
 function BottomSheetWrapper() {
     const {modalContent} = useSelector(reduxSelectors.userInterface);
-    const bottomSheetRef = useRef<RBSheet>(null);
+    const bottomSheetRef = useRef<BottomSheet>(null);
+    const dispatch = useDispatch();
+    const [state, setState] = useState(BottomSheetState.CLOSED);
+    const [contentHeight, setContentHeight] = useState(0);
+    const handleOnLayout = useCallback(
+        ({
+            nativeEvent: {
+                layout: {height},
+            },
+        }) => setContentHeight(height),
+        [],
+    );
+    const handleChange = useCallback(
+        (index: number) => {
+            if (!index && state === BottomSheetState.OPENED) {
+                bottomSheetRef.current?.close();
+                setState(BottomSheetState.CLOSED);
+                dispatch(actionsUI.setModalContent());
+            }
+        },
+        [dispatch, state],
+    );
+
     useEffect(() => {
-        if (!bottomSheetRef?.current) {
+        if (!bottomSheetRef.current || !modalContent) {
             return;
         }
-        if (!modalContent) {
-            return bottomSheetRef.current.close();
-        }
-        bottomSheetRef.current.open();
-    }, [modalContent]);
-    return (
-        <RBSheet
+        bottomSheetRef.current.expand();
+        setState(BottomSheetState.OPENED);
+    }, [modalContent, bottomSheetRef]);
+
+    const snapPoints = useMemo(() => [0, contentHeight], [contentHeight]);
+    return !modalContent ? null : (
+        <BottomSheet
+            enableContentPanningGesture
+            enableOverDrag
+            enableHandlePanningGesture
+            backdropComponent={backdropProps => (
+                <BottomSheetBackdrop
+                    {...backdropProps}
+                    enableTouchThrough
+                    closeOnPress
+                    style={styles.container}
+                />
+            )}
+            onChange={handleChange}
             ref={bottomSheetRef}
-            closeOnDragDown
-            closeOnPressBack
-            closeOnPressMask
-            height={500}
-            animationType={'fade'}
-            openDuration={100}
-            closeDuration={100}
-            customStyles={{
-                container: {
-                    borderTopLeftRadius: 20,
-                    borderTopRightRadius: 20,
-                    height: 'auto',
-                    paddingBottom: 20,
-                },
-            }}>
-            {modalContent}
-        </RBSheet>
+            index={1}
+            snapPoints={snapPoints}>
+            <BottomSheetView onLayout={handleOnLayout}>
+                {modalContent}
+            </BottomSheetView>
+        </BottomSheet>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        minWidth: '100%',
+        bottom: 0,
+        top: 0,
+        position: 'absolute',
+    },
+});
 
 export default memo(BottomSheetWrapper);

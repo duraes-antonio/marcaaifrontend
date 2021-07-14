@@ -24,12 +24,15 @@ import ActionButton from '../../shared/components/buttons/action-button';
 import {IconLib, IconWrapper} from '../../shared/components/icon/icon-lib';
 import ButtonContained from '../../shared/components/buttons/button';
 import reduxSelectors from '../../shared/store/root-selector';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import ServiceList from '../../shared/components/service/service-list';
 import {services} from '../../data/services/di';
 import {Nullable} from '../../shared/types/general';
 import SliderHeaderPage from '../../shared/components/slider-header-page/slider-header-page';
 import {CustomImage} from '../../shared/components/general/image';
+import {requestAccessFineLocation} from '../../shared/util/permission';
+import {actionsUI} from '../../shared/store/modules/user-interface/actions';
+import ProviderAddressMap from './provider-address-map';
 
 type ProviderParams = {
     [RouteName.PROVIDER]: {id: IdType; item: IProviderBasic};
@@ -85,28 +88,33 @@ function Header(props: {provider: IProviderBasic}): JSX.Element {
 }
 
 function ProviderDetails(props: ProviderPageProps) {
-    const provider = useSelector(reduxSelectors.providerSelected);
-    const [providerComplete, setProviderComplete] =
-        useState<Nullable<IProvider>>();
+    const providerResume = useSelector(reduxSelectors.providerSelected);
+    const [provider, setProvider] = useState<Nullable<IProvider>>();
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation();
-    const showAddress = () => null;
+    const dispatch = useDispatch();
+    const showAddress = useCallback(async () => {
+        if (!(await requestAccessFineLocation())) {
+            return;
+        }
+        dispatch(actionsUI.setModalContent(<ProviderAddressMap />));
+    }, [dispatch]);
 
     useEffect(() => {
-        if (!provider) {
+        if (!providerResume) {
             navigation.navigate(RouteName.SEARCH);
             return;
         }
-    }, [navigation, provider]);
+    }, [navigation, providerResume]);
 
     const getAndSetProvider = useCallback(async () => {
         setLoading(true);
-        if (!provider?.id) {
+        if (!providerResume?.id) {
             return;
         }
-        setProviderComplete(await services.provider.get(provider.id));
+        setProvider(await services.provider.get(providerResume.id));
         setLoading(false);
-    }, [provider?.id]);
+    }, [providerResume?.id]);
 
     useEffect(() => {
         getAndSetProvider();
@@ -115,7 +123,7 @@ function ProviderDetails(props: ProviderPageProps) {
     const HeaderInstance = useMemo(
         () => (
             <ContainerPage>
-                <Header provider={provider as IProviderBasic} />
+                <Header provider={providerResume as IProviderBasic} />
                 <ButtonContained
                     icon={({color}) => (
                         <IconWrapper
@@ -131,11 +139,11 @@ function ProviderDetails(props: ProviderPageProps) {
                 />
             </ContainerPage>
         ),
-        [provider],
+        [providerResume, showAddress],
     );
     return (
         <ServiceList
-            items={providerComplete?.services ?? []}
+            items={provider?.services ?? []}
             header={HeaderInstance}
             loading={loading}
             onRefresh={getAndSetProvider}

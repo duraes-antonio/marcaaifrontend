@@ -12,8 +12,8 @@ UIManager.setLayoutAnimationEnabledExperimental &&
 const App = (): JSX.Element => {
     return (
         <Provider store={store}>
-            {<BottomSheetWrapper />}
             <Routes />
+            <BottomSheetWrapper />
         </Provider>
     );
 };
