@@ -38,6 +38,14 @@ export const SemiBoldText = styled(CommonText)`
     font-family: ${robotoMedium};
 `;
 
+export const ListName = styled(SemiBoldText)`
+    font-size: 16px;
+    color: ${colorPrimary};
+    align-self: flex-start;
+    margin-bottom: 10px;
+    line-height: 16px;
+`;
+
 export const BoldText = styled(CommonText)`
     font-family: ${robotoBold};
     font-weight: bold;

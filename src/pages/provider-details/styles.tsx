@@ -57,7 +57,6 @@ export const TagsContainer = styled.View`
 export const ContainerPage = styled.View`
     align-items: center;
     background-color: ${pageBackgroundColor};
-    padding-bottom: 20px;
 `;
 
 export const styles = StyleSheet.create({

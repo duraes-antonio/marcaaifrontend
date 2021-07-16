@@ -58,7 +58,6 @@ function ServiceList(props: ListProps<Service>): JSX.Element {
             data={props.items}
             renderItem={renderItem}
             maxToRenderPerBatch={6}
-            stickyHeaderIndices={[0]}
             ListHeaderComponent={props.header}
             style={[styles.container, props.style]}
             refreshing={props.loading}

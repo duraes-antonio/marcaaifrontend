@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {IdType} from '../../shared/store/types';
@@ -21,18 +21,17 @@ import {
 import TagWorkdayStatus from '../../shared/components/tag/tag-workday';
 import TagDistance from '../../shared/components/tag/tag-distance';
 import ActionButton from '../../shared/components/buttons/action-button';
-import {IconLib, IconWrapper} from '../../shared/components/icon/icon-lib';
-import ButtonContained from '../../shared/components/buttons/button';
+import {IconLib} from '../../shared/components/icon/icon-lib';
 import reduxSelectors from '../../shared/store/root-selector';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import ServiceList from '../../shared/components/service/service-list';
 import {services} from '../../data/services/di';
-import {Nullable} from '../../shared/types/general';
 import SliderHeaderPage from '../../shared/components/slider-header-page/slider-header-page';
 import {CustomImage} from '../../shared/components/general/image';
-import {getLocation} from '../../shared/util/permission';
-import {actionsUI} from '../../shared/store/modules/user-interface/actions';
-import ProviderAddressMap from './provider-address-map';
+import {ListName} from '../../shared/components/general/texts';
+import {pagePaddingHorizontal} from '../../shared/components/general/page/styles';
+import AddressCard from './address-card/address-card';
+import {Nullable} from '../../shared/types/general';
 
 type ProviderParams = {
     [RouteName.PROVIDER]: {id: IdType; item: IProviderBasic};
@@ -87,26 +86,11 @@ function Header(props: {provider: IProviderBasic}): JSX.Element {
     );
 }
 
-function ProviderDetails(props: ProviderPageProps) {
+function ProviderDetails() {
     const providerResume = useSelector(reduxSelectors.providerSelected);
     const [provider, setProvider] = useState<Nullable<IProvider>>();
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation();
-    const dispatch = useDispatch();
-    const showAddress = useCallback(async () => {
-        await getLocation(
-            position =>
-                position &&
-                dispatch(
-                    actionsUI.setModalContent(
-                        <ProviderAddressMap
-                            targetLocation={provider?.address}
-                        />,
-                    ),
-                ),
-        );
-    }, [dispatch]);
-
     useEffect(() => {
         if (!providerResume) {
             navigation.navigate(RouteName.SEARCH);
@@ -119,6 +103,7 @@ function ProviderDetails(props: ProviderPageProps) {
         if (!providerResume?.id) {
             return;
         }
+        // @ts-ignore
         setProvider(await services.provider.get(providerResume.id));
         setLoading(false);
     }, [providerResume?.id]);
@@ -131,22 +116,19 @@ function ProviderDetails(props: ProviderPageProps) {
         () => (
             <ContainerPage>
                 <Header provider={providerResume as IProviderBasic} />
-                <ButtonContained
-                    icon={({color}) => (
-                        <IconWrapper
-                            size={24}
-                            color={color}
-                            name={'map-marker-alt'}
-                            lib={IconLib.FONT_AWESOME_5}
-                        />
-                    )}
-                    style={styles.showAddressButton}
-                    text={'Ver endereço'}
-                    onPress={showAddress}
-                />
+                {provider ? (
+                    <AddressCard
+                        address={provider.address}
+                        dest={provider?.address.location}
+                        style={{marginBottom: 25}}
+                    />
+                ) : null}
+                <ListName style={{paddingHorizontal: pagePaddingHorizontal}}>
+                    Serviços ofertados
+                </ListName>
             </ContainerPage>
         ),
-        [providerResume, showAddress],
+        [provider, providerResume],
     );
     return (
         <ServiceList
@@ -158,4 +140,4 @@ function ProviderDetails(props: ProviderPageProps) {
     );
 }
 
-export default ProviderDetails;
+export default memo(ProviderDetails);

@@ -113,8 +113,17 @@ export class ProviderServiceMock
                     },
                 ],
                 address: {
-                    latitude: -20.111364,
-                    longitude: -40.2445235,
+                    state: 'ES',
+                    number: 39,
+                    street: 'Rua Pedra Branca',
+                    neighborhood: 'Jardim Camburi',
+                    zipcode: '29161699',
+                    city: 'Serra',
+                    country: 'Brasil',
+                    location: {
+                        latitude: -20.3305,
+                        longitude: -40.2922,
+                    },
                 },
             });
         },
