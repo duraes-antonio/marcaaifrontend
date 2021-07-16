@@ -3,6 +3,7 @@ import {IdType} from '../../shared/store/types';
 import {Workday, WorkdayStatus} from './schedule';
 import {utilDate} from '../../shared/util/date';
 import {Service} from './service';
+import {Location} from '../../models/location';
 
 export enum ProviderCategory {
     BARBER,
@@ -26,6 +27,7 @@ export interface IProvider extends IProviderBasic {
     routine?: Workday;
     exceptionalDays?: Workday[];
     services: Service[];
+    address: Location;
 }
 
 export type ProviderInput = Omit<IProvider, 'id'>;
@@ -41,6 +43,10 @@ export class Provider implements IProvider {
     readonly workStatus: WorkdayStatus = WorkdayStatus.UNKNOWN;
     readonly distanceInMeters?: number;
     readonly services: Service[] = [];
+    readonly address: Location = {
+        latitude: 0,
+        longitude: 0,
+    };
 
     constructor(data: IProvider) {
         Object.assign(this, data);

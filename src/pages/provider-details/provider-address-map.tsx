@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import Geolocation from 'react-native-geolocation-service';
 import {Location} from '../../models/location';
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import {Dimensions, StyleSheet} from 'react-native';
+import {Nullable} from '../../shared/types/general';
 
 const styles = StyleSheet.create({
     map: {
@@ -11,9 +12,8 @@ const styles = StyleSheet.create({
     },
 });
 
-function ProviderAddressMap(props): JSX.Element {
-    const [userLocation, setUserLocation] = useState<Location>();
-
+function ProviderAddressMap(props: {targetLocation: Location}) {
+    const [userLocation, setUserLocation] = useState<Nullable<Location>>();
     useEffect(() => {
         const watchId = Geolocation.watchPosition(
             ({coords}) =>
@@ -21,21 +21,34 @@ function ProviderAddressMap(props): JSX.Element {
                     longitude: coords.longitude,
                     latitude: coords.latitude,
                 }),
-            err => console.log(err),
+            err => console.log('Err', err),
             {enableHighAccuracy: true, interval: 1000, distanceFilter: 0.1},
         );
         return () => Geolocation.clearWatch(watchId);
     }, []);
+    console.log(userLocation);
     return (
         <MapView
+            showsUserLocation
+            zoomControlEnabled
+            zoomEnabled
+            zoomTapEnabled
             style={styles.map}
-            initialRegion={{
-                latitude: -20.22875777915862,
-                longitude: -40.29061554505814,
+            region={{
+                latitude: userLocation?.latitude ?? 0,
+                longitude: userLocation?.longitude ?? 0,
                 latitudeDelta: 0.00922,
                 longitudeDelta: 0.00421,
-            }}
-        />
+            }}>
+            <Marker
+                coordinate={{
+                    latitude: userLocation?.latitude ?? 0,
+                    longitude: userLocation?.longitude ?? 0,
+                }}
+                title={'Zéquinha'}
+                description={'The zékinha position'}
+            />
+        </MapView>
     );
 }
 

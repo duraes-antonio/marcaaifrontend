@@ -112,6 +112,10 @@ export class ProviderServiceMock
                             'https://dicasdemassagem.com/wp-content/uploads/beneficios-da-massagem-com-pedras-quentes.jpg',
                     },
                 ],
+                address: {
+                    latitude: -20.111364,
+                    longitude: -40.2445235,
+                },
             });
         },
     );

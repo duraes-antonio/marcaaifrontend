@@ -30,7 +30,7 @@ import {services} from '../../data/services/di';
 import {Nullable} from '../../shared/types/general';
 import SliderHeaderPage from '../../shared/components/slider-header-page/slider-header-page';
 import {CustomImage} from '../../shared/components/general/image';
-import {requestAccessFineLocation} from '../../shared/util/permission';
+import {getLocation} from '../../shared/util/permission';
 import {actionsUI} from '../../shared/store/modules/user-interface/actions';
 import ProviderAddressMap from './provider-address-map';
 
@@ -94,10 +94,17 @@ function ProviderDetails(props: ProviderPageProps) {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const showAddress = useCallback(async () => {
-        if (!(await requestAccessFineLocation())) {
-            return;
-        }
-        dispatch(actionsUI.setModalContent(<ProviderAddressMap />));
+        await getLocation(
+            position =>
+                position &&
+                dispatch(
+                    actionsUI.setModalContent(
+                        <ProviderAddressMap
+                            targetLocation={provider?.address}
+                        />,
+                    ),
+                ),
+        );
     }, [dispatch]);
 
     useEffect(() => {
